@@ -1,0 +1,29 @@
+NOTE: Update criteria on to get a 6 was 'to sum' but this should have been 'to count'.  
+If you did manage to do it with a sum that will also be considered correct
+
+This assignment will count for 1/3 of your final grade for PDP.
+
+Deadline: 10 May 2020, 23:59
+
+To get a 6:
+- Count the number of ratings given for each movie 
+- Code have to run on HDFS with a basic setup (Lecture 1 & 2) 
+- Code is executed with a python command with MrJob 
+- Upload a document on Moodle with the following information: 
+  - Name and student number 
+  - URL from GitHub with your source code Explain in the document what steps have to be taken to execute the code 
+  - Explain in your own words every step included source code. 
+  - Make a screenshot from the result and include it in your document
+
+To get an 8:
+- Same as to get a 6, but additionally:
+- Sort the movies by their numbers of ratings
+
+To get a 10:
+- Same as to get an 8, but additionally:
+- Sort the genres by their total ratings 
+
+
+python HD_rating.py -r hadoop --hadoop-streaming-jar /usr/hdp/current/hadoop-mapreduce-client/hadoop-streaming.jar u.data
+python HD_rating.py -r hadoop --hadoop-streaming-jar /usr/hdp/current/hadoop-mapreduce-client/hadoop-streaming.jar u.data
+python HD_rating.py -r hadoop --hadoop-streaming-jar /usr/hdp/current/hadoop-mapreduce-client/hadoop-streaming.jar u.data
