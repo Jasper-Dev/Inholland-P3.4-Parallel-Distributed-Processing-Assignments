@@ -1,7 +1,7 @@
 from mrjob.job import MRJob
 from mrjob.step import MRStep
 
-class Assignment1_Ratings(MRJob):
+class Assignment1A_Ratings(MRJob):
 
     # initiate mrjobs steps
     def steps(self):
@@ -48,8 +48,8 @@ class Assignment1_Ratings(MRJob):
     def reducer_output_ratings(self, _, input_generator):
         # convert generator to list
         inputlist = list(input_generator)
-        # sort the list so the movieIDs are sorted in ASC order, don't ask me why it needs to be this abomination, but it doesnt work otherwise.. 🤷‍♂️
-        sortedinputlist = sorted(sorted(inputlist), key=lambda row: (-len(row[0])), reverse=True)
+        # sort the list so the movieIDs are sorted in ASC order, this only works when the ID is cast to int, otherwise you're in for a whole bunch of shenanigans 😅
+        sortedinputlist = sorted(inputlist, key=lambda row: int(row[0]))
         
         # loop through all the sorted list items
         for movieID, ratingcount in sortedinputlist:
@@ -58,4 +58,4 @@ class Assignment1_Ratings(MRJob):
             yield 'MovieID: ' + str(movieID).rjust(4, ' '), str(ratingcount).rjust(4, ' ') + ' ratings.'
 
 if __name__ == '__main__':
-    Assignment1_Ratings.run()
+    Assignment1A_Ratings.run()

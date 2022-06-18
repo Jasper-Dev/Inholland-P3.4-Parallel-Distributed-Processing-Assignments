@@ -36,8 +36,7 @@ class Assignment1B_show_and_sort(MRJob):
     def combiner_count_ratings(self, movieID, assigned_value):
         yield movieID, sum(assigned_value)
 
-    # CHANGES: 
-    # - swapped assigned_values and movieID as key-value-pair
+    # NO CHANGES MADE: 
     #
     # EXPLANATION:
     # this will do basically the same as the combiner but on a different level, yields key-value-pairs for the summed up assigned_values up of each reccuring movieID
@@ -47,7 +46,7 @@ class Assignment1B_show_and_sort(MRJob):
         yield None, (movieID, sum(occurrence))
 
     # CHANGES: 
-    # - swapped the assigned_values and movieID as key-value-pair
+    # - changed the identifier to 1 in the sorted function to swap the assigned_values and movieID as key-value-pair, as the list needs to be sorted based on ratingcount
     # - ordered DESC to have MOST (not highest) rated movie up top 
     # - ratingcount is already integer, so removed the casting
     #  
@@ -57,7 +56,7 @@ class Assignment1B_show_and_sort(MRJob):
     def reducer_output_ratings(self, _, input_generator):
         # convert generator to list
         inputlist = list(input_generator)
-        # sort the list so the movieIDs are sorted in DESC order, so most rated movie is up top
+        # sort the list so the ratingcounts are sorted in DESC order, so most rated movie is up top
         sortedinputlist = sorted(inputlist, key=lambda row: row[1], reverse=True)
         
         # loop through all the sorted list items
