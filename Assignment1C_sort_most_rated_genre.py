@@ -51,16 +51,16 @@ class Assignment1C_sort_most_rated_genre(MRJob):
 
     def generator_get_datasets(self, movieID, values):
 
-        # if values[0] == "metadata":
+        if values[0] == "metadata":
 
-        # genre_types = ["unknown", "action", "adventure", "animation", "children", "comedy", "crime", "documentary", "drama", "fantasy", "film_noir", "horror", "musical", "mystery", "romance", "scifi", "thriller", "war", "western"]
+            genre_types = ["unknown", "action", "adventure", "animation", "children", "comedy", "crime", "documentary", "drama", "fantasy", "film_noir", "horror", "musical", "mystery", "romance", "scifi", "thriller", "war", "western"]
 
-        #     genres = split_by_pipe[-19:]
-        #     genreID = 0
-        #     for is_genre in genres:
-        #         if is_genre == "1":
-        #             yield movieID, ("genre", genre_types[genreID])
-        #         genreID = genreID + 1  
+            genres = values[-19:]
+            genreID = 0
+            for is_genre in genres:
+                if is_genre == "1":
+                    yield movieID, ("genre", genre_types[genreID])
+                genreID = genreID + 1  
 
 
             # yield movieID, ("metadata",
@@ -84,7 +84,9 @@ class Assignment1C_sort_most_rated_genre(MRJob):
             # ("war", war),
             # ("western", western))
 
-        yield movieID, values[0]
+        else:
+            yield movieID, values
+
 
 if __name__ == '__main__':
     Assignment1C_sort_most_rated_genre.run()
