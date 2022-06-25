@@ -64,12 +64,12 @@ class Assignment1C_sort_most_rated_genre(MRJob):
 
         for name, movie_rating in values_generator:
             if name == "rating":
-                # first lookup if movieID exists, if not create key:value pair with <movieID:List[]>
-                if movieID not in rating_dictionary.keys():
-                    rating_dictionary.update({movieID:[]})
+                # first lookup if movie_rating exists, if not create key:value pair with <movie_rating:List[]>
+                if movie_rating not in rating_dictionary.keys():
+                    rating_dictionary.update({movie_rating:[]})
                     
-                # add the movierating to the corresponding movie
-                rating_dictionary[movieID].append(movie_rating)
+                # add the movierating to the corresponding ratingdictionary
+                rating_dictionary[movie_rating].append(movie_rating)
                     
 
                 # then lookup if the ratings
