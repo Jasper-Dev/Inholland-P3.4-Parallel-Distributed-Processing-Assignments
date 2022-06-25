@@ -66,16 +66,20 @@ class Assignment1C_sort_most_rated_genre(MRJob):
         genre_list = []
         for name, value in values_generator:
             if name == "rating":
-                print("movieID: " + movieID + ", rating: " + value)
+                print("movieID: ", movieID)
+                print("rating: " + value)
                 rating_list.append(value)
             elif name == "genre":
-                print("movieID: " + movieID + ", genre: " + value)
+                print("movieID: " + movieID)
+                print("genre: " + value)
                 genre_list.append(value)
             else:
-                print("movieID: " + movieID + ", name: " + name + ", value: " + value)
+                print("movieID: " + movieID)
+                print("name: " + name)
+                print("value: " + value)
                 yield 0, ("invalid input", values_generator)
         
-        print(str(movieID) + " rating: " + str(rating_list) + " genre: " + str(genre_list))
+        print(movieID + " rating: " + rating_list + " genre: " + genre_list)
         yield movieID, (("rating", rating_list), ("genre", genre_list))
 
     # def reducer_join_ratings_on_value(self, movieID, values_generator):
