@@ -67,7 +67,7 @@ class Assignment1C_sort_most_rated_genre(MRJob):
                 rating_count_list.append(movie_rating)
                 yield movieID, values_list
 
-            elif values_list[0] == "metadata":
+            elif values_list[0] == "genre":
                 ratingamount = len(rating_count_list)
                 genreID = values_list[1]                
                 yield movieID, values_list
