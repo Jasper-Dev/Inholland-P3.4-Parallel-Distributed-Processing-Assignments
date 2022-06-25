@@ -41,15 +41,26 @@ class Assignment1C_sort_most_rated_genre(MRJob):
 
         elif len(split_by_pipe := line.split(PIPE_DELIMITER)) == 24:
             (movieID, movie_title, _, _, _, unknown, action, adventure, animation, children, comedy, crime, documentary, drama, fantasy, film_noir, horror, musical, mystery, romance, scifi, thriller, war, western) = split_by_pipe
+            yield movieID, ("metadata", unknown, action, adventure, animation, children, comedy, crime, documentary, drama, fantasy, film_noir, horror, musical, mystery, romance, scifi, thriller, war, western)
 
-            genre_types = ["unknown", "action", "adventure", "animation", "children", "comedy", "crime", "documentary", "drama", "fantasy", "film_noir", "horror", "musical", "mystery", "romance", "scifi", "thriller", "war", "western"]
+        else:
+            # if len(split_by_tab) != 1 & len(split_by_pipe) != 1:
+            yield 0, ("invalid input", line)
 
-            genres = split_by_pipe[-19:]
-            genreID = 0
-            for is_genre in genres:
-                if is_genre == "1":
-                    yield movieID, ("genre", genre_types[genreID])
-                genreID = genreID + 1  
+
+
+    def generator_get_datasets(self, movieID, values):
+
+        # if values[0] == "metadata":
+
+        # genre_types = ["unknown", "action", "adventure", "animation", "children", "comedy", "crime", "documentary", "drama", "fantasy", "film_noir", "horror", "musical", "mystery", "romance", "scifi", "thriller", "war", "western"]
+
+        #     genres = split_by_pipe[-19:]
+        #     genreID = 0
+        #     for is_genre in genres:
+        #         if is_genre == "1":
+        #             yield movieID, ("genre", genre_types[genreID])
+        #         genreID = genreID + 1  
 
 
             # yield movieID, ("metadata",
@@ -73,48 +84,7 @@ class Assignment1C_sort_most_rated_genre(MRJob):
             # ("war", war),
             # ("western", western))
 
-        else:
-            # if len(split_by_tab) != 1 & len(split_by_pipe) != 1:
-            yield 0, (line, 0)
-
-
-
-
-        #     ratings = split_by_pipe[-19:]
-        
-        #     i = 0 # Iterator = genreID
-        #     for column in ratings:
-        #         if column == "1":
-        #             yield movieID, ("movie_details", i)
-        #         i = i + 1  
-
-        # (userID, movieID, rating, timestamp) = line.split('\t')
-            #yield split_by_tab, 1
-        
-        # yield line, 0
-        # yield split_by_pipe, 0
-            
-    
-    # def reducer_count_ratings(self, movieID, values):
-    #     rating_count_list = []
-    #     for value in values:
-    #         if value[0] == 'A':
-    #             rating_count_list.append(value)
-    #         if value[0] == 'B':
-    #             ratingamount = len(rating_count_list)
-    #             genreID = value[1]                
-    #             yield movieID, (ratingamount, genreID)
-  
-    # def reducer_output_ratings(self, _, input_generator):
-    #     inputlist = list(input_generator)
-    #     sortedinputlist = sorted(inputlist, key=lambda row: int(row[0]))
-        
-      
-    #     for movieID, ratingcount in sortedinputlist:
-    #         yield 'MovieID: ' + str(movieID).rjust(4, ' '), str(ratingcount).rjust(4, ' ') + ' ratings.'
-
-    def generator_get_datasets(self, movieID, values):
-        yield movieID, values
+        yield movieID, values[0]
 
 if __name__ == '__main__':
     Assignment1C_sort_most_rated_genre.run()
