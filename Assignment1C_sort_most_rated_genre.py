@@ -59,27 +59,39 @@ class Assignment1C_sort_most_rated_genre(MRJob):
 
 
     def reducer_ratings_on_value(self, movieID, values_generator):
-        movie_dictionary = {}
-        #rating_list.append("rating_list")
-
+        rating_list = []
         for name, value in values_generator:
-            rating_dictionary = {}
-            genre_dictionary = {}
-            # first lookup if movieID exists, if not create key:value pair with <movieID:List[]>
-            if movieID not in movie_dictionary.keys():
-                rating_dictionary.update({:[]})
-                genre_dictionary.append({"genre":[]})
+            if name == "rating":
+                rating_list.append(value)
+            else:
+                yield movieID, (name, value)
 
-                movie_dictionary.update({movieID:{}})
+        yield movieID, ("rating", rating_list)
 
-            movie_dictionary[movieID][name].append(value)
 
-           # if name == "rating":
-                 # add the movierating to the corresponding movie
-                # curr_dict["rating"].append(value)
-            #if name == "genre":
-                # add the genres to the corresponding movie
-                # curr_dict["genre"].append(value)
+
+
+        # movie_dictionary = {}
+        # #rating_list.append("rating_list")
+
+        # for name, value in values_generator:
+        #     rating_list = []
+        #     genre_list = []
+        #     # first lookup if movieID exists, if not create key:value pair with <movieID:List[]>
+        #     if movieID not in movie_dictionary.keys():
+        #         rating_dictionary.append({:[]})
+        #         genre_dictionary.append({"genre":[]})
+
+        #         movie_dictionary.update({movieID:{}})
+
+        #     movie_dictionary[movieID][name].append(value)
+
+        #    # if name == "rating":
+        #          # add the movierating to the corresponding movie
+        #         # curr_dict["rating"].append(value)
+        #     #if name == "genre":
+        #         # add the genres to the corresponding movie
+        #         # curr_dict["genre"].append(value)
 
 
 
@@ -91,24 +103,24 @@ class Assignment1C_sort_most_rated_genre(MRJob):
 
 
 
-                # first lookup if movie_rating exists, if not create key:value pair with <movie_rating:List[]>
-                # if movie_rating not in rating_dictionary.keys():
-                #     rating_dictionary.update({movie_rating:[]})
+        #         # first lookup if movie_rating exists, if not create key:value pair with <movie_rating:List[]>
+        #         # if movie_rating not in rating_dictionary.keys():
+        #         #     rating_dictionary.update({movie_rating:[]})
                     
-                # # add the movierating to the corresponding ratingdictionary
-                # rating_dictionary[movie_rating].append(movie_rating)
+        #         # # add the movierating to the corresponding ratingdictionary
+        #         # rating_dictionary[movie_rating].append(movie_rating)
                     
 
-                # then lookup if the ratings
-                # if rating_dictionary[movieID].count(movieID) == 0:
-                #     rating_dictionary[value] = []
-                # else:
-                #     rating_list
-            # yield name+"-"+str(value), (movieID, value)
-                # yield None, (name, sum(movieID, value))
-                # movie_rating = values_list
-                # if movie_rating == "1":
-        yield movieID, (rating_dictionary)
+        #         # then lookup if the ratings
+        #         # if rating_dictionary[movieID].count(movieID) == 0:
+        #         #     rating_dictionary[value] = []
+        #         # else:
+        #         #     rating_list
+        #     # yield name+"-"+str(value), (movieID, value)
+        #         # yield None, (name, sum(movieID, value))
+        #         # movie_rating = values_list
+        #         # if movie_rating == "1":
+        # yield movieID, (rating_dictionary)
 
                 # rating_count_list.append(movie_rating)
                 # yield movieID, rating_count_list
