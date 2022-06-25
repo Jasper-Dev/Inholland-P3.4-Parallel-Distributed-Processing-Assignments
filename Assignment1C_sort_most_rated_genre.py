@@ -17,10 +17,11 @@ class Assignment1C_sort_most_rated_genre(MRJob):
             MRStep(
                 mapper=self.mapper_get_datasets #,          # step 1.1, map the data
                 # reducer=self.reducer_count_ratings      # step 1.3, reduce the data
-            )#,
-            # MRStep( 
-            #     reducer=self.reducer_output_ratings     # step 2.1, reduce to show the workings of multi-step jobs
-            # ) 
+             ),
+            MRStep( 
+                mapper=self.generator_get_datasets
+                # reducer=self.reducer_output_ratings     # step 2.1, reduce to show the workings of multi-step jobs
+            ) 
         ]
 
     # in order to know the amount of ratings per genre we need to join 2 datafiles u.data for the ratings and u.item for the movie details
@@ -111,6 +112,9 @@ class Assignment1C_sort_most_rated_genre(MRJob):
       
     #     for movieID, ratingcount in sortedinputlist:
     #         yield 'MovieID: ' + str(movieID).rjust(4, ' '), str(ratingcount).rjust(4, ' ') + ' ratings.'
+
+    def generator_get_datasets(self, movieID, values):
+        yield movieID, values
 
 if __name__ == '__main__':
     Assignment1C_sort_most_rated_genre.run()
