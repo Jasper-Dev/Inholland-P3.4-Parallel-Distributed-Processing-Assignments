@@ -36,13 +36,13 @@ class Assignment1C_sort_most_rated_genre(MRJob):
 
         if len(split_by_tab := line.split(TAB_DELIMITER)) == 4:   
                 (userID, movieID, rating, timestamp) = split_by_tab
-                yield "rating", (split_by_tab, 1)
+                yield movieID, ("rating", split_by_tab, 1)
 
         elif len(split_by_pipe := line.split(PIPE_DELIMITER)) == 24:
                 (movieID, movie_title, _, _, _, unknown, action, adventure, animation, children, comedy, crime,
                 documentary, drama, fantasy, film_noir, horror, musical, mystery, romance, 
                 scifi, thriller, war, western) = split_by_pipe
-                yield "metadata", (split_by_pipe, 1)
+                yield movieID, ("metadata", split_by_pipe, 1)
 
         else:
             # if len(split_by_tab) != 1 & len(split_by_pipe) != 1:
