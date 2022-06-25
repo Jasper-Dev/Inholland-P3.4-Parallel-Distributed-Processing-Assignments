@@ -6,6 +6,7 @@ class Assignment1C_sort_most_rated_genre(MRJob):
 
     #set constants
     SORT_VALUES = True
+    
 
 
     # initiate mrjobs steps
@@ -28,19 +29,37 @@ class Assignment1C_sort_most_rated_genre(MRJob):
     # this same principle is what we are going to do here aswell, so we eventually get:
     # movie_id [[movie_title,genre1,genre2...],[sum_of_ratings]]
     def mapper_get_datasets(self, _, line):
-        split_by_tab = line.split('\t')
-        
+        TAB_DELIMITER = "\t"
+        PIPE_DELIMITER = "|"
+
+        # first determine the seperator character
+
+        if line.count(TAB_DELIMITER) > 0:
+            split_by_tab = line.split(TAB_DELIMITER)                
+            if len(split_by_tab) == 4:
+                (userID, movieID, rating, timestamp) = split_by_tab
+                yield movieID, (split_by_tab, 1)
+            else:
+                yield 0, (line, 0)
+
+        elif line.count(PIPE_DELIMITER) > 0:    
+            split_by_pipe = line.split(PIPE_DELIMITER)
+            if len(split_by_pipe) == 24:
                 
-        # if len(split_by_tab) == 4:
-        #     (userID, movieID, rating, timestamp) = split_by_tab
-        #     yield movieID, ("movie_ratings", 1)
-        
-        # else:
-        #     split_by_pipe = line.split('|')
-        #     (movieID, movie_title, _, _, _, unknown, action, adventure, animation, children, comedy, crime,
-        #     documentary, drama, fantasy, film_noir, horror, musical, mystery, romance, 
-        #     scifi, thriller, war, western) = split_by_pipe
-        
+                (movieID, movie_title, _, _, _, unknown, action, adventure, animation, children, comedy, crime,
+                documentary, drama, fantasy, film_noir, horror, musical, mystery, romance, 
+                scifi, thriller, war, western) = split_by_pipe
+                yield movieID, (split_by_pipe, 1)
+            else:
+                yield 0, (line, 0)
+
+        else:
+            # if len(split_by_tab) != 1 & len(split_by_pipe) != 1:
+            yield 0, (line, 0)
+
+
+
+
         #     ratings = split_by_pipe[-19:]
         
         #     i = 0 # Iterator = genreID
@@ -50,8 +69,11 @@ class Assignment1C_sort_most_rated_genre(MRJob):
         #         i = i + 1  
 
         # (userID, movieID, rating, timestamp) = line.split('\t')
-        yield line, 1
-
+            #yield split_by_tab, 1
+        
+        # yield line, 0
+        # yield split_by_pipe, 0
+            
     
     # def reducer_count_ratings(self, movieID, values):
     #     rating_count_list = []
