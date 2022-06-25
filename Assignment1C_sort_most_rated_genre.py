@@ -69,14 +69,14 @@ class Assignment1C_sort_most_rated_genre(MRJob):
                 rating_dictionary[movieID].append({"rating":[]})
                 rating_dictionary[movieID].append({"genre":[]})
 
-            curr_dict = rating_dictionary[movieID]
+            rating_dictionary[movieID][name].append(value)
 
-            if name == "rating":
+           # if name == "rating":
                  # add the movierating to the corresponding movie
-                curr_dict["rating"].append(value)
-            if name == "genre":
+                # curr_dict["rating"].append(value)
+            #if name == "genre":
                 # add the genres to the corresponding movie
-                curr_dict["genre"].append(value)
+                # curr_dict["genre"].append(value)
 
 
 
@@ -89,11 +89,11 @@ class Assignment1C_sort_most_rated_genre(MRJob):
 
 
                 # first lookup if movie_rating exists, if not create key:value pair with <movie_rating:List[]>
-                if movie_rating not in rating_dictionary.keys():
-                    rating_dictionary.update({movie_rating:[]})
+                # if movie_rating not in rating_dictionary.keys():
+                #     rating_dictionary.update({movie_rating:[]})
                     
-                # add the movierating to the corresponding ratingdictionary
-                rating_dictionary[movie_rating].append(movie_rating)
+                # # add the movierating to the corresponding ratingdictionary
+                # rating_dictionary[movie_rating].append(movie_rating)
                     
 
                 # then lookup if the ratings
@@ -105,7 +105,7 @@ class Assignment1C_sort_most_rated_genre(MRJob):
                 # yield None, (name, sum(movieID, value))
                 # movie_rating = values_list
                 # if movie_rating == "1":
-        yield movieID, (rating_list, genre_list)
+        yield movieID, (rating_dictionary)
 
                 # rating_count_list.append(movie_rating)
                 # yield movieID, rating_count_list
