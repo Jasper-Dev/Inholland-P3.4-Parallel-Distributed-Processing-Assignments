@@ -58,15 +58,14 @@ class Assignment1C_sort_most_rated_genre(MRJob):
 
 
     def reducer_join_ratings_with_genres_on_movieID(self, movieID, values):
-        rating_count_list = []
-        for value in values:
-            if value[0] == "rating":
-                movie_rating = value[1]
-                rating_count_list.append(movie_rating)
-            if value[0] == "metadata":
-                ratingamount = len(rating_count_list)
-                genreID = value[1]                
-                yield movieID, (("genre", genreID), ("ratings", rating_count_list))
+        rating_count_list = []  
+        if values[0] == "rating":
+            movie_rating = values[1]
+            rating_count_list.append(movie_rating)
+        if values[0] == "metadata":
+            ratingamount = len(rating_count_list)
+            genreID = values[1]                
+            yield movieID, (("genre", genreID), ("ratings", rating_count_list))
 
 
 if __name__ == '__main__':
