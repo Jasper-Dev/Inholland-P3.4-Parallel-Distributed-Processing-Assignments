@@ -66,7 +66,8 @@ class Assignment1C_sort_most_rated_genre(MRJob):
             if name == "rating":
 
                 # first lookup if movieID exists
-                rating_dictionary.update({movie_rating:[movieID, movie_rating]})
+                rating_dictionary[movieID].append(movie_rating)
+                # rating_dictionary.update({movieID:[]})
 
                 # then lookup if the ratings
                 # if rating_dictionary[movieID].count(movieID) == 0:
@@ -77,7 +78,7 @@ class Assignment1C_sort_most_rated_genre(MRJob):
                 # yield None, (name, sum(movieID, value))
                 # movie_rating = values_list
                 # if movie_rating == "1":
-        yield None, rating_dictionary
+        yield rating_dictionary
 
                 # rating_count_list.append(movie_rating)
                 # yield movieID, rating_count_list
