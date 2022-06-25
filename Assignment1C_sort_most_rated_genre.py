@@ -47,37 +47,12 @@ class Assignment1C_sort_most_rated_genre(MRJob):
     def generator_seperate_genres(self, movieID, values):
 
         if values[0] == "metadata":
-
-            genre_types = ["unknown", "action", "adventure", "animation", "children", "comedy", "crime", "documentary", "drama", "fantasy", "film_noir", "horror", "musical", "mystery", "romance", "scifi", "thriller", "war", "western"]
-
             genres = values[-19:]
             genreID = 0
             for is_genre in genres:
                 if is_genre == "1":
-                    yield movieID, ("genre", genreID) # ,genre_types[genreID])
+                    yield movieID, ("genre", genreID)
                 genreID = genreID + 1  
-
-
-            # yield movieID, ("metadata",
-            # ("unknown", unknown),
-            # ("action", action),
-            # ("adventure", adventure),
-            # ("animation", animation),
-            # ("children", children),
-            # ("comedy", comedy),
-            # ("crime", crime),
-            # ("documentary", documentary),
-            # ("drama", drama),
-            # ("fantasy", fantasy),
-            # ("film_noir", film_noir),
-            # ("horror", horror),
-            # ("musical", musical),
-            # ("mystery", mystery),
-            # ("romance", romance),
-            # ("scifi", scifi),
-            # ("thriller", thriller),
-            # ("war", war),
-            # ("western", western))
 
         else:
             yield movieID, values
