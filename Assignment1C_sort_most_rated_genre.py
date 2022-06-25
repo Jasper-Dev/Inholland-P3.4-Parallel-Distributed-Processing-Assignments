@@ -63,13 +63,14 @@ class Assignment1C_sort_most_rated_genre(MRJob):
         for values_list in values_generator:
             if values_list[0] == "rating":
                 movie_rating = values_list[1]
-                rating_count_list.append(movie_rating)
+                yield movieID, movie_rating
+            #     rating_count_list.append(movie_rating)
+
+            # elif values_list[0] == "genre":
+            #     ratingamount = len(rating_count_list)
+            #     genreID = values_list[1]                
                 
-            elif values_list[0] == "genre":
-                ratingamount = len(rating_count_list)
-                genreID = values_list[1]                
-                
-                yield movieID, (("genre", genreID), ("ratings", rating_count_list))
+            #     yield movieID, (("genre", genreID), ("ratings", rating_count_list))
             else:
                 yield 0, ("holup", values_list)
 
