@@ -80,15 +80,11 @@ class Assignment1C_sort_most_rated_genre(MRJob):
     def reducer_join_ratings_on_value(self, movieID, values_generator):
 
         for rating_generator, genre_generator in values_generator:
-            yield movieID, (rating_generator, genre_generator)
-
-#hier zijn we
-
-
-            # for name, genre in genre_generator:
-            #     yield genre, rating_generator[1]
+            #yield movieID, (genre_generator[1]) #development purposes
+            for genre in genre_generator[1]:
+                yield genre, (rating_generator[1], movieID)
                 #for name, rating in rating_generator:
-
+#hier zijn we
             
     #        #
 
