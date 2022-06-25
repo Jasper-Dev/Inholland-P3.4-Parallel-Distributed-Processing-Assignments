@@ -52,21 +52,32 @@ class Assignment1C_sort_most_rated_genre(MRJob):
             for is_genre in values_list[-19:]:
                 if is_genre == "1":
                     yield movieID, ("genre", genreID)
-                genreID = genreID + 1  
+                genreID += 1  
 
         else:
             yield movieID, values_list
 
 
     def reducer_ratings_on_value(self, movieID, values_generator):
-       
-        for name, value in values_generator:
-            # if name == "rating":
+        rating_dictionary = {}
+        #rating_list.append("rating_list")
+
+        for name, movie_rating in values_generator:
+            if name == "rating":
+
+                # first lookup if movieID exists
+                rating_dictionary.update({movie_rating:[movieID, movie_rating]})
+
+                # then lookup if the ratings
+                # if rating_dictionary[movieID].count(movieID) == 0:
+                #     rating_dictionary[value] = []
+                # else:
+                #     rating_list
             # yield name+"-"+str(value), (movieID, value)
-            yield None, (movieID, sum(int(value)), name)
+                # yield None, (name, sum(movieID, value))
                 # movie_rating = values_list
                 # if movie_rating == "1":
-                    
+        yield None, rating_dictionary
 
                 # rating_count_list.append(movie_rating)
                 # yield movieID, rating_count_list
