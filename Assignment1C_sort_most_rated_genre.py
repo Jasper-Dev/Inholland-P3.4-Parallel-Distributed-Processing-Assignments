@@ -34,24 +34,15 @@ class Assignment1C_sort_most_rated_genre(MRJob):
 
         # first determine the seperator character
 
-        if line.count(TAB_DELIMITER) > 0:
-            split_by_tab = line.split(TAB_DELIMITER)                
-            if len(split_by_tab) == 4:
+        if len(split_by_tab := line.split(TAB_DELIMITER)) == 4:   
                 (userID, movieID, rating, timestamp) = split_by_tab
                 yield movieID, (split_by_tab, 1)
-            else:
-                yield 0, (line, 0)
 
-        elif line.count(PIPE_DELIMITER) > 0:    
-            split_by_pipe = line.split(PIPE_DELIMITER)
-            if len(split_by_pipe) == 24:
-                
+        elif len(split_by_pipe := line.split(PIPE_DELIMITER)) == 24:
                 (movieID, movie_title, _, _, _, unknown, action, adventure, animation, children, comedy, crime,
                 documentary, drama, fantasy, film_noir, horror, musical, mystery, romance, 
                 scifi, thriller, war, western) = split_by_pipe
                 yield movieID, (split_by_pipe, 1)
-            else:
-                yield 0, (line, 0)
 
         else:
             # if len(split_by_tab) != 1 & len(split_by_pipe) != 1:
