@@ -44,32 +44,36 @@ class Assignment1C_sort_most_rated_genre(MRJob):
 
 
 
-    def generator_seperate_genres(self, movieID, values):
+    def generator_seperate_genres(self, movieID, values_list):
 
-        if values[0] == "metadata":
+        if values_list[0] == "metadata":
             genreID = 0
-            for is_genre in values[-19:]:
+            for is_genre in values_list[-19:]:
                 if is_genre == "1":
                     yield movieID, ("genre", genreID)
                 genreID = genreID + 1  
 
         else:
-            yield movieID, values
+            yield movieID, values_list
 
 
-    def reducer_join_ratings_with_genres_on_movieID(self, movieID, values):
+    def reducer_join_ratings_with_genres_on_movieID(self, movieID, values_generator):
+        # convert generator to list
+        values_list = list(values_generator)
+
         rating_count_list = []  
-        if values[0] == "rating":
-            movie_rating = values[1]
+        if values_list[0] == "rating":
+            movie_rating = values_list[1]
             rating_count_list.append(movie_rating)
-            yield movieID, values
-        elif values[0] == "metadata":
+            yield movieID, values_list
+
+        elif values_list[0] == "metadata":
             ratingamount = len(rating_count_list)
-            genreID = values[1]                
-            yield movieID, values
+            genreID = values_list[1]                
+            yield movieID, values_list
             # yield movieID, (("genre", genreID), ("ratings", rating_count_list))
         else:
-            yield 0, ("holup",values)
+            yield 0, ("holup",values_list)
 
 
 
