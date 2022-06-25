@@ -16,7 +16,8 @@ class Assignment1C_sort_most_rated_genre(MRJob):
         return [
             MRStep( mapper=self.mapper_get_datasets),
             MRStep( mapper=self.generator_seperate_genres,
-                    reducer=self.reducer_join_ratings_with_genres_on_movieID
+                    reducer=self.reducer_ratings_on_value
+                    # reducer=self.reducer_join_ratings_with_genres_on_movieID
             ) 
         ]
 
@@ -57,22 +58,44 @@ class Assignment1C_sort_most_rated_genre(MRJob):
             yield movieID, values_list
 
 
-    def reducer_join_ratings_with_genres_on_movieID(self, movieID, values_generator):
-        rating_count_list = []
-        # convert generator to list
-        for values_list in values_generator:
-            if values_list[0] == "rating":
-                movie_rating = values_list[1]
-                rating_count_list.append(movie_rating)
-                yield movieID, rating_count_list
+    def reducer_ratings_on_value(self, movieID, values_generator):
+       
+        for name, value in values_generator:
+            # if name == "rating":
+            yield movieID, (name+"-"+str(value), value)
+                # movie_rating = values_list
+                # if movie_rating == "1":
+                    
+
+                # rating_count_list.append(movie_rating)
+                # yield movieID, rating_count_list
 
             # elif values_list[0] == "genre":
             #     ratingamount = len(rating_count_list)
             #     genreID = values_list[1]                
                 
             #     yield movieID, (("genre", genreID), ("ratings", rating_count_list))
-            else:
-                yield 0, ("holup", values_list)
+            # else:
+                # yield movieID, (name, genreID)
+                # yield 0, ("holup", values_list)
+
+
+    # def reducer_join_ratings_with_genres_on_movieID(self, movieID, values_generator):
+    #     rating_count_list = []
+    #     # convert generator to list
+    #     for values_list in values_generator:
+    #         if values_list[0] == "rating":
+    #             movie_rating = values_list[1]
+    #             rating_count_list.append(movie_rating)
+    #             yield movieID, rating_count_list
+
+    #         # elif values_list[0] == "genre":
+    #         #     ratingamount = len(rating_count_list)
+    #         #     genreID = values_list[1]                
+                
+    #         #     yield movieID, (("genre", genreID), ("ratings", rating_count_list))
+    #         else:
+    #             yield 0, ("holup", values_list)
 
 
 
