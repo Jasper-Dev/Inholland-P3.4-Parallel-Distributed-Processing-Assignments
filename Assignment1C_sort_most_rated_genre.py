@@ -19,11 +19,12 @@ class Assignment1C_sort_most_rated_genre(MRJob):
                     #  combiner=self.combiner_join_ratings_on_genreID#,
                     # combiner=self.combiner_ratings_on_value,
                     # reducer=self.reducer_ratings_on_value
-                    reducer=self.reducer_join_ratings_on_value
+                    reducer=self.reducer_join_ratings_on_genreID
+                    
                     # reducer=self.reducer_join_ratings_with_genres_on_movieID
-            )#,
-            #MRStep( reducer=self.reducer_step2
-            #) 
+            ),
+            MRStep( reducer=self.reducer_join_ratings_on_value
+            ) 
         ]
 
     # in order to know the amount of ratings per genre we need to join 2 datafiles u.data for the ratings and u.item for the movie details
@@ -63,7 +64,7 @@ class Assignment1C_sort_most_rated_genre(MRJob):
 
 
     # def combiner_join_ratings_on_genreID(self, movieID, values_generator):
-    def reducer_join_ratings_on_value(self, movieID, values_generator):
+    def reducer_join_ratings_on_genreID(self, movieID, values_generator):
         rating_list = []
         genre_list = []
         for name, value in values_generator:
@@ -76,13 +77,17 @@ class Assignment1C_sort_most_rated_genre(MRJob):
         # yield movieID, ("genre", genre_list)
         yield movieID, (("rating", rating_list), ("genre", genre_list))
 
-    # def reducer_join_ratings_on_value(self, movieID, values_generator):
+    def reducer_join_ratings_on_value(self, movieID, values_generator):
 
-    #     for rating_generator, genre_generator in values_generator:
-    #         yield movieID, (rating_generator, genre_generator)
-    #         # for name, genre in genre_generator:
-    #         #     yield genre, rating_generator[1]
-    #             #for name, rating in rating_generator:
+        for rating_generator, genre_generator in values_generator:
+            yield movieID, (rating_generator, genre_generator)
+
+#hier zijn we
+
+
+            # for name, genre in genre_generator:
+            #     yield genre, rating_generator[1]
+                #for name, rating in rating_generator:
 
             
     #        #
