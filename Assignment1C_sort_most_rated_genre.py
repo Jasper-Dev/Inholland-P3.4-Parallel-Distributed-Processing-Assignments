@@ -21,7 +21,9 @@ class Assignment1C_sort_most_rated_genre(MRJob):
                     # reducer=self.reducer_ratings_on_value
                     reducer=self.reducer_join_ratings_on_value
                     # reducer=self.reducer_join_ratings_with_genres_on_movieID
-            ) 
+            )#,
+            #MRStep( reducer=self.reducer_step2
+            #) 
         ]
 
     # in order to know the amount of ratings per genre we need to join 2 datafiles u.data for the ratings and u.item for the movie details
@@ -49,7 +51,6 @@ class Assignment1C_sort_most_rated_genre(MRJob):
 
 
     def generator_seperate_genres(self, movieID, values_list):
-
         if values_list[0] == "metadata":
             genreID = 0
             for is_genre in values_list[-19:]:
@@ -69,11 +70,11 @@ class Assignment1C_sort_most_rated_genre(MRJob):
             if name == "rating":
                 rating_list.append(value)
             elif name == "genre":
-                genre_list.append(str(value))
+                genre_list.append(value)
             else:
                 yield 0, ("invalid input", values_generator)
-        yield movieID, ("genre", genre_list)
-        #yield movieID, (("rating", rating_list), ("genre", genre_list))
+        # yield movieID, ("genre", genre_list)
+        yield movieID, (("rating", rating_list), ("genre", genre_list))
 
     # def reducer_join_ratings_on_value(self, movieID, values_generator):
 
