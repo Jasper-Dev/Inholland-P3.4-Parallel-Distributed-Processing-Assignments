@@ -16,8 +16,10 @@ class Assignment1C_sort_most_rated_genre(MRJob):
         return [
             MRStep( mapper=self.mapper_get_datasets),
             MRStep( mapper=self.generator_seperate_genres,
+                     combiner=self.combiner_join_ratings_on_genreID,
                     # combiner=self.combiner_ratings_on_value,
-                    reducer=self.reducer_ratings_on_value
+                    # reducer=self.reducer_ratings_on_value
+                    reducer=self.reducer_join_ratings_on_value
                     # reducer=self.reducer_join_ratings_with_genres_on_movieID
             ) 
         ]
@@ -59,19 +61,29 @@ class Assignment1C_sort_most_rated_genre(MRJob):
             yield movieID, values_list
 
 
-    def reducer_ratings_on_value(self, movieID, values_generator):
+    def combiner_join_ratings_on_genreID(self, movieID, values_generator):
         rating_list = []
+        genre_list = []
         for name, value in values_generator:
             if name == "rating":
                 rating_list.append(value)
-
             elif name == "genre":
-                yield value, (movieID, rating_list)
-
+                genre_list.append(value)
             else:
                 yield 0, ("invalid input", values_generator)
             
-        yield movieID, ("rating", rating_list)
+        yield movieID, (("rating", rating_list), ("genre", genre_list))
+
+    def reducer_join_ratings_on_value(self, movieID, values_generator):
+
+        for rating_generator, genre_generator in values_generator:
+            for name, genre in genre_generator:
+                yield genre, rating_generator[1]
+                #for name, rating in rating_generator:
+
+            
+           #
+
 
     # def reducer_ratings_on_value(self, movieID, values_generator):
     #     rating_list = []
