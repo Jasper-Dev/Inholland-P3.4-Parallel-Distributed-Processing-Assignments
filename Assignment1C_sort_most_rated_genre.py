@@ -59,17 +59,20 @@ class Assignment1C_sort_most_rated_genre(MRJob):
 
 
     def reducer_ratings_on_value(self, movieID, values_generator):
-        rating_dictionary = {}
+        movie_dictionary = {}
         #rating_list.append("rating_list")
 
         for name, value in values_generator:
+            rating_dictionary = {}
+            genre_dictionary = {}
             # first lookup if movieID exists, if not create key:value pair with <movieID:List[]>
-            if movieID not in rating_dictionary.keys():
-                rating_dictionary.update({movieID:{}})
-                rating_dictionary[movieID].append({"rating":[]})
-                rating_dictionary[movieID].append({"genre":[]})
+            if movieID not in movie_dictionary.keys():
+                rating_dictionary.update({:[]})
+                genre_dictionary.append({"genre":[]})
 
-            rating_dictionary[movieID][name].append(value)
+                movie_dictionary.update({movieID:{}})
+
+            movie_dictionary[movieID][name].append(value)
 
            # if name == "rating":
                  # add the movierating to the corresponding movie
