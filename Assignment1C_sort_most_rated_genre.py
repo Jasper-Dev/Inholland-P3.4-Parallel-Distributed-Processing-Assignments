@@ -54,7 +54,7 @@ class Assignment1C_sort_most_rated_genre(MRJob):
             genreID = 0
             for is_genre in genres:
                 if is_genre == "1":
-                    yield movieID, ("genre", genre_types[genreID])
+                    yield movieID, ("genre", genreID) # ,genre_types[genreID])
                 genreID = genreID + 1  
 
 
