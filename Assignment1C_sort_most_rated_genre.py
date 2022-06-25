@@ -62,7 +62,8 @@ class Assignment1C_sort_most_rated_genre(MRJob):
        
         for name, value in values_generator:
             # if name == "rating":
-            yield name+"-"+str(value), (movieID, value)
+            # yield name+"-"+str(value), (movieID, value)
+            yield None, (movieID, sum(value), name)
                 # movie_rating = values_list
                 # if movie_rating == "1":
                     
