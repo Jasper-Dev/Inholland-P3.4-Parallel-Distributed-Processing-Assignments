@@ -41,7 +41,26 @@ class Assignment1C_sort_most_rated_genre(MRJob):
         elif len(split_by_pipe := line.split(PIPE_DELIMITER)) == 24:
                 (movieID, movie_title, _, _, _, unknown, action, adventure, animation, children, comedy, crime, documentary, drama, fantasy, film_noir, horror, musical, mystery, romance, scifi, thriller, war, western) = split_by_pipe
 
-                yield movieID, ("metadata", unknown, action, adventure, animation, children, comedy, crime, documentary, drama, fantasy, film_noir, horror, musical, mystery, romance, scifi, thriller, war, western)
+                yield movieID, ("metadata",
+                ("unknown", unknown),
+                ("action", action),
+                ("adventure", adventure),
+                ("animation", animation),
+                ("children", children),
+                ("comedy", comedy),
+                ("crime", crime),
+                ("documentary", documentary),
+                ("drama", drama),
+                ("fantasy", fantasy),
+                ("film_noir", film_noir),
+                ("horror", horror),
+                ("musical", musical),
+                ("mystery", mystery),
+                ("romance", romance),
+                ("scifi", scifi),
+                ("thriller", thriller),
+                ("war", war),
+                ("western", western))
 
         else:
             # if len(split_by_tab) != 1 & len(split_by_pipe) != 1:
