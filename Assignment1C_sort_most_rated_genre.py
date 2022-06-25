@@ -14,12 +14,8 @@ class Assignment1C_sort_most_rated_genre(MRJob):
         # instead of writing a script for each iteration, we can make use of steps.
         # with steps we specify all the steps mrjob needs to take and chain them together
         return [
-            MRStep(
-                mapper=self.mapper_get_datasets #,          # step 1.1, map the data
-                # reducer=self.reducer_count_ratings      # step 1.3, reduce the data
-             ),
-            MRStep( 
-                mapper=self.generator_get_datasets
+            MRStep(mapper=self.mapper_get_datasets),
+            MRStep(mapper=self.generator_seperate_genres
                 # reducer=self.reducer_output_ratings     # step 2.1, reduce to show the workings of multi-step jobs
             ) 
         ]
@@ -44,12 +40,11 @@ class Assignment1C_sort_most_rated_genre(MRJob):
             yield movieID, ("metadata", unknown, action, adventure, animation, children, comedy, crime, documentary, drama, fantasy, film_noir, horror, musical, mystery, romance, scifi, thriller, war, western)
 
         else:
-            # if len(split_by_tab) != 1 & len(split_by_pipe) != 1:
             yield 0, ("invalid input", line)
 
 
 
-    def generator_get_datasets(self, movieID, values):
+    def generator_seperate_genres(self, movieID, values):
 
         if values[0] == "metadata":
 
