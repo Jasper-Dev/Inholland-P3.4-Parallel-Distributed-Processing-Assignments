@@ -63,7 +63,27 @@ class Assignment1C_sort_most_rated_genre(MRJob):
         #rating_list.append("rating_list")
 
         for name, movie_rating in values_generator:
+            # first lookup if movieID exists, if not create key:value pair with <movieID:List[]>
+            if movieID not in rating_dictionary.keys():
+                rating_dictionary.update({movieID:[]})
+
             if name == "rating":
+                 # add the movierating to the corresponding movie
+                rating_dictionary[movieID].append(movie_rating)
+            if name == "genre":
+                # add the genres to the corresponding movie
+                rating_dictionary[movieID].append(movie_rating)
+
+
+
+
+
+
+                
+
+
+
+
                 # first lookup if movie_rating exists, if not create key:value pair with <movie_rating:List[]>
                 if movie_rating not in rating_dictionary.keys():
                     rating_dictionary.update({movie_rating:[]})
@@ -81,7 +101,7 @@ class Assignment1C_sort_most_rated_genre(MRJob):
                 # yield None, (name, sum(movieID, value))
                 # movie_rating = values_list
                 # if movie_rating == "1":
-        yield None, rating_dictionary
+        yield movieID, (rating_list, genre_list)
 
                 # rating_count_list.append(movie_rating)
                 # yield movieID, rating_count_list
