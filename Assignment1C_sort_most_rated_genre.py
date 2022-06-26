@@ -90,16 +90,19 @@ class Assignment1C_sort_most_rated_genre(MRJob):
             for genreID in genre_generator[1]:
                 yield movieID, (genreID, len(rating_generator[1])) #ratings_list
                 
+
+    #####################    kan vervangen worden door sum bij  reducer_join_ratings_on_value?   
     def combiner_reduce_genres(self, _, values_generator):
         for genreID, rating_count in values_generator:
-            yield genreID, sum(rating_count)
+            yield genreID, rating_count
 
     def reducer_reduce_genres(self, genreID, rating_count):
         yield None, (genreID, sum(rating_count)) 
- 
+ #########################
+
     def reducer_sort_most_rated_genres(self, _, values_generator):
         #for genreID, rating_count in values_generator:
-        sorted_list = sorted(values_generator, key=lambda row: int(row[1]))
+        sorted_list = sorted(values_generator, key=lambda row: int(row[1]), reverse=True)
 
 
 
@@ -107,17 +110,7 @@ class Assignment1C_sort_most_rated_genre(MRJob):
         for genreID, rating_count in sorted_list:
             yield 'Genre: ' + str(genreID).rjust(2, ' '), str(rating_count).rjust(5, ' ') + ' ratings.'
 
-    def reducer_output_ratings(self, _, input_generator):
-        # convert generator to list
-        inputlist = list(input_generator)
-        # sort the list so the movieIDs are sorted in ASC order, this only works when the ID is cast to int, otherwise you're in for a whole bunch of shenanigans 😅
-        sortedinputlist = sorted(inputlist, key=lambda row: int(row[0]))
-        
-        # loop through all the sorted list items
-        for movieID, ratingcount in sortedinputlist:
-            # print the list of movieIDs with their rating count.
-            # the ".rjust(4,' ')" is to space the numbers evenly, so its easier to read.
-            yield 'MovieID: ' + str(movieID).rjust(4, ' '), str(ratingcount).rjust(4, ' ') + ' ratings.'
+
 
 
 if __name__ == '__main__':
