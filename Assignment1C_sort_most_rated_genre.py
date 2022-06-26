@@ -17,10 +17,10 @@ class Assignment1C_sort_most_rated_genre(MRJob):
             MRStep(
                 mapper=self.mapper_get_datasets
             ),
-            # MRStep( 
-            #     mapper=self.mapper_assign_each_genre_an_ID,
+            MRStep( 
+                mapper=self.mapper_assign_each_genre_an_ID,
             #     reducer=self.reducer_join_ratings_on_genreID
-            # ),
+            ),
             # MRStep(
             #     reducer=self.reducer_join_ratings_on_value
             # ),
@@ -78,8 +78,6 @@ class Assignment1C_sort_most_rated_genre(MRJob):
 
     # {movieID:["rating", ratingValue]}
     # 
-
-
     def mapper_assign_each_genre_an_ID(self, movieID, values_list):
         if values_list[0] == "metadata":
             genreID = 0
