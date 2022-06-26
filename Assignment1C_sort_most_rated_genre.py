@@ -1,16 +1,15 @@
 from mrjob.job import MRJob
 from mrjob.step import MRStep
 
-# because the extra / C assignment is vastly different than the extra B assingment, i'm going to provide detailed comments eventho i've already described them in assignment A or B
+# because the extra / C assignment is vastly different than the extra B assingment, i'm going to provide all detailed comments eventho it's possible I already described them in assignment A or B
 class Assignment1C_sort_most_rated_genre(MRJob):
 
     #set constants
-    SORT_VALUES = True
     GENRE_TYPES = ["unknown", "action", "adventure", "animation", "children", "comedy", "crime", "documentary", "drama", "fantasy", "film_noir", "horror", "musical", "mystery", "romance", "scifi", "thriller", "war", "western"]
  
 
 
-    # initiate mrjobs steps
+    # define all the steps mrjobs need to take
     def steps(self):
         # instead of writing a script for each iteration, we can make use of steps.
         # with steps we specify all the steps mrjob needs to take and chain them together
@@ -18,32 +17,42 @@ class Assignment1C_sort_most_rated_genre(MRJob):
             MRStep(
                 mapper=self.mapper_get_datasets
             ),
-            MRStep( 
-                mapper=self.mapper_assign_each_genre_an_ID,
-                reducer=self.reducer_join_ratings_on_genreID
-            ),
-            MRStep(
-                reducer=self.reducer_join_ratings_on_value
-            ),
-            MRStep(
-                combiner=self.combiner_reduce_genres,
-                reducer=self.reducer_reduce_genres
-            ),
-            MRStep(
-                reducer=self.reducer_sort_most_rated_genres
-            ),
+            # MRStep( 
+            #     mapper=self.mapper_assign_each_genre_an_ID,
+            #     reducer=self.reducer_join_ratings_on_genreID
+            # ),
+            # MRStep(
+            #     reducer=self.reducer_join_ratings_on_value
+            # ),
+            # MRStep(
+            #     combiner=self.combiner_reduce_genres,
+            #     reducer=self.reducer_reduce_genres
+            # ),
+            # MRStep(
+            #     reducer=self.reducer_sort_most_rated_genres
+            # ),
         ]
 
     # in order to know the amount of ratings per genre we need to join 2 datafiles u.data for the ratings and u.item for the movie details
     # a quick google how to join 2 data sets leads us to the following code: https://gist.github.com/rjurney/2f350b2cbed9862b692b
-    # here they first load in the data and then they assign each dataset to their own list with an id as key,
-    # this same principle is what we are going to do here aswell, so we eventually get:
-    # movie_id [[movie_title,genre1,genre2...],[sum_of_ratings]]
+    # this code is essential as it shows how mrjobs loads in datafiles.
+
+    # which in my eyes is completely at random, when doing a yield directly after loading them in, the lines of the datasets are unordered and randomly placed in the output.
+    # for this we need a solution. 
+    # First, we need to determine beforehand which delimiters that are being used in the datasets, and how many columns each dataset has.
+    # this way we can recognize which lines are from which dataset, choose which columns we wanna use and give each line their corresponding name / category.
+
+    # this mapper yields the following {key:value}-pairs
+    # {movieID:["rating", ratingValue]} 
+    # "1"	["rating", "4"]
+
+    # {movieID:["metadata", "l", "i", "s", "t", " ", "o", "f", " ", "g", "e", "n", "r", "e", "I", "D", "s", ]}
+    # "1"	["metadata", "0", "0", "0", "1", "1", "1", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0"]
+
+
     def mapper_get_datasets(self, _, line):
         TAB_DELIMITER = "\t"
         PIPE_DELIMITER = "|"
-
-        # first determine the seperator character
 
         if len(split_by_tab := line.split(TAB_DELIMITER)) == 4:   
             (userID, movieID, rating, timestamp) = split_by_tab
@@ -56,6 +65,21 @@ class Assignment1C_sort_most_rated_genre(MRJob):
         else:
             yield 0, ("invalid input", line)
 
+    # In the next step we have another mapper, I choose to do another mapper to accomodate for the genres in the metadata 
+    # and because it splits all the genres into seperate lines, which makes the total dataset larger instead of smaller.
+    # This is necessary, as we eventually need to assign the ratings to each corresponding genre.
+    
+    # The splitting of the genres is done by a for loop, which iterates over a 'genres-only' subset from the metadata dataset.
+    # while iterating it replaces all genre-values of 1, with the corresponding genreID and all the genre-values of 0 are irrelevant and being dropped
+
+    # this mapper yields the following {key:value}-pairs
+    # {movieID:["genre", genreID]} 
+    #
+
+    # {movieID:["rating", ratingValue]}
+    # 
+
+
     def mapper_assign_each_genre_an_ID(self, movieID, values_list):
         if values_list[0] == "metadata":
             genreID = 0
@@ -67,6 +91,10 @@ class Assignment1C_sort_most_rated_genre(MRJob):
         else:
             yield movieID, values_list
 
+
+    # here they first load in the data and then they assign each dataset to their own list with an id as key,
+    # this same principle is what we are going to do here aswell, so we eventually get:
+    # movie_id [[movie_title,genre1,genre2...],[sum_of_ratings]]
     def reducer_join_ratings_on_genreID(self, movieID, values_generator):
         rating_list = []
         genre_list = []
