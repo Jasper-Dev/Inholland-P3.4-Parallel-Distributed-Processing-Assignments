@@ -52,7 +52,7 @@ class Assignment1C_sort_most_rated_genre(MRJob):
         elif len(split_by_pipe := line.split(PIPE_DELIMITER)) == 24:
             (movieID, movie_title, _, _, _, unknown, action, adventure, animation, children, comedy, crime, documentary, drama, fantasy, film_noir, horror, musical, mystery, romance, scifi, thriller, war, western) = split_by_pipe
             yield movieID, ("metadata", unknown, action, adventure, animation, children, comedy, crime, documentary, drama, fantasy, film_noir, horror, musical, mystery, romance, scifi, thriller, war, western)
-
+         
         else:
             yield 0, ("invalid input", line)
 
@@ -77,16 +77,16 @@ class Assignment1C_sort_most_rated_genre(MRJob):
                 genre_list.append(value)
             else:
                 yield 0, ("invalid input", values_generator)
-        # yield movieID, ("genre", genre_list)
+        
         yield movieID, (("rating", rating_list), ("genre", genre_list))
 
     def reducer_join_ratings_on_value(self, movieID, values_generator):
         for rating_generator, genre_generator in values_generator:
             rating_list = rating_generator[1]
             genre_list = genre_generator[1]
-            #yield movieID, (genre_list) #development purposes
+
             for genreID in genre_list:
-                yield movieID, (genreID, len(rating_list)) #ratings_list
+                yield movieID, (genreID, len(rating_list))
                 
 
     def combiner_reduce_genres(self, _, values_generator):
@@ -98,7 +98,7 @@ class Assignment1C_sort_most_rated_genre(MRJob):
 
     def reducer_sort_most_rated_genres(self, _, values_generator):
         #for genreID, rating_count in values_generator:
-        sorted_list = sorted(values_generator, key=lambda row: int(row[1]))
+        sorted_list = sorted(values_generator, key=lambda row: int(row[1]), reverse=True)
 
 
 
