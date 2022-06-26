@@ -28,6 +28,9 @@ class Assignment1C_sort_most_rated_genre(MRJob):
                 combiner=self.combiner_reduce_genres,
                 reducer=self.reducer_reduce_genres
             ),
+            # MRStep(
+            #     reducer=self.reducer_sort_most_rated_genres
+            # ),
         ]
 
     # in order to know the amount of ratings per genre we need to join 2 datafiles u.data for the ratings and u.item for the movie details
