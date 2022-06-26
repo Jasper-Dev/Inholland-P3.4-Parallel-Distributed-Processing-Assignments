@@ -104,7 +104,8 @@ class Assignment1C_sort_most_rated_genre(MRJob):
 
             # sort the list so the movieIDs are sorted in ASC order, this only works when the ID is cast to int, otherwise you're in for a whole bunch of shenanigans 😅
         for genreID, rating_count in sorted_list:
-            yield 'Genre: ' + self.GENRE_TYPES[genreID] + " ID: "+ str(genreID).rjust(2, ' '), str(rating_count).rjust(5, ' ') + ' ratings.'
+           
+            yield 'Genre: ' + self.GENRE_TYPES[genreID].ljust(11, ' ') + " with ID: "+ str(genreID).rjust(2, ' ') + " is rated:", str(rating_count).rjust(5, ' ') + ' times.'
 
 
 
