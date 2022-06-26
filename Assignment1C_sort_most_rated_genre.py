@@ -28,9 +28,9 @@ class Assignment1C_sort_most_rated_genre(MRJob):
                 combiner=self.combiner_reduce_genres,
                 reducer=self.reducer_reduce_genres
             ),
-            # MRStep(
-            #     reducer=self.reducer_sort_most_rated_genres
-            # ),
+            MRStep(
+                reducer=self.reducer_sort_most_rated_genres
+            ),
         ]
 
     # in order to know the amount of ratings per genre we need to join 2 datafiles u.data for the ratings and u.item for the movie details
@@ -91,121 +91,33 @@ class Assignment1C_sort_most_rated_genre(MRJob):
                 yield movieID, (genreID, len(rating_generator[1])) #ratings_list
                 
     def combiner_reduce_genres(self, _, values_generator):
-        genre_rating_dictionary = {}
         for genreID, rating_count in values_generator:
-            yield genreID, rating_count #development purposes
-        #     if genreID not in genre_rating_dictionary.keys():
-        #         genre_rating_dictionary.update({genreID:[]})
-
-        #     genre_rating_dictionary[genreID].extend(rating_list)
-        # yield None, genre_rating_dictionary
+            yield genreID, sum(rating_count)
 
     def reducer_reduce_genres(self, genreID, rating_count):
-            yield genreID, sum(rating_count) #development purposes
-        #     if genreID not in genre_rating_dictionary.keys():
-        #         genre_rating_dictionary.update({genreID:[]})
-
-        #     genre_rating_dictionary[genreID].extend(rating_list)
-        # yield None, genre_rating_dictionary
-
-            
-                                
-
-
-    # def reducer_ratings_on_value(self, movieID, values_generator):
-    #     rating_list = []
-    #     for name, value in values_generator:
-    #         if name == "rating":
-    #             rating_list = value
-
-    #         if name == "genre":
-    #             yield value, rating_list
-
-        #yield movieID, ("rating", rating_list)
+        yield None, (genreID, sum(rating_count)) 
+ 
+    def reducer_sort_most_rated_genres(self, _, values_generator):
+        #for genreID, rating_count in values_generator:
+        sorted_list = sorted(values_generator, key=lambda row: int(row[1]))
 
 
 
-        # movie_dictionary = {}
-        # #rating_list.append("rating_list")
+            # sort the list so the movieIDs are sorted in ASC order, this only works when the ID is cast to int, otherwise you're in for a whole bunch of shenanigans 😅
+        for genreID, rating_count in sorted_list:
+            yield 'Genre: ' + str(genreID).rjust(2, ' '), str(rating_count).rjust(5, ' ') + ' ratings.'
 
-        # for name, value in values_generator:
-        #     rating_list = []
-        #     genre_list = []
-        #     # first lookup if movieID exists, if not create key:value pair with <movieID:List[]>
-        #     if movieID not in movie_dictionary.keys():
-        #         rating_dictionary.append({:[]})
-        #         genre_dictionary.append({"genre":[]})
-
-        #         movie_dictionary.update({movieID:{}})
-
-        #     movie_dictionary[movieID][name].append(value)
-
-        #    # if name == "rating":
-        #          # add the movierating to the corresponding movie
-        #         # curr_dict["rating"].append(value)
-        #     #if name == "genre":
-        #         # add the genres to the corresponding movie
-        #         # curr_dict["genre"].append(value)
-
-
-
-
-
-
-                
-
-
-
-
-        #         # first lookup if movie_rating exists, if not create key:value pair with <movie_rating:List[]>
-        #         # if movie_rating not in rating_dictionary.keys():
-        #         #     rating_dictionary.update({movie_rating:[]})
-                    
-        #         # # add the movierating to the corresponding ratingdictionary
-        #         # rating_dictionary[movie_rating].append(movie_rating)
-                    
-
-        #         # then lookup if the ratings
-        #         # if rating_dictionary[movieID].count(movieID) == 0:
-        #         #     rating_dictionary[value] = []
-        #         # else:
-        #         #     rating_list
-        #     # yield name+"-"+str(value), (movieID, value)
-        #         # yield None, (name, sum(movieID, value))
-        #         # movie_rating = values_list
-        #         # if movie_rating == "1":
-        # yield movieID, (rating_dictionary)
-
-                # rating_count_list.append(movie_rating)
-                # yield movieID, rating_count_list
-
-            # elif values_list[0] == "genre":
-            #     ratingamount = len(rating_count_list)
-            #     genreID = values_list[1]                
-                
-            #     yield movieID, (("genre", genreID), ("ratings", rating_count_list))
-            # else:
-                # yield movieID, (name, genreID)
-                # yield 0, ("holup", values_list)
-
-
-    # def reducer_join_ratings_with_genres_on_movieID(self, movieID, values_generator):
-    #     rating_count_list = []
-    #     # convert generator to list
-    #     for values_list in values_generator:
-    #         if values_list[0] == "rating":
-    #             movie_rating = values_list[1]
-    #             rating_count_list.append(movie_rating)
-    #             yield movieID, rating_count_list
-
-    #         # elif values_list[0] == "genre":
-    #         #     ratingamount = len(rating_count_list)
-    #         #     genreID = values_list[1]                
-                
-    #         #     yield movieID, (("genre", genreID), ("ratings", rating_count_list))
-    #         else:
-    #             yield 0, ("holup", values_list)
-
+    def reducer_output_ratings(self, _, input_generator):
+        # convert generator to list
+        inputlist = list(input_generator)
+        # sort the list so the movieIDs are sorted in ASC order, this only works when the ID is cast to int, otherwise you're in for a whole bunch of shenanigans 😅
+        sortedinputlist = sorted(inputlist, key=lambda row: int(row[0]))
+        
+        # loop through all the sorted list items
+        for movieID, ratingcount in sortedinputlist:
+            # print the list of movieIDs with their rating count.
+            # the ".rjust(4,' ')" is to space the numbers evenly, so its easier to read.
+            yield 'MovieID: ' + str(movieID).rjust(4, ' '), str(ratingcount).rjust(4, ' ') + ' ratings.'
 
 
 if __name__ == '__main__':
