@@ -25,6 +25,7 @@ class Assignment1C_sort_most_rated_genre(MRJob):
                 reducer=self.reducer_join_ratings_on_value
             ),
             MRStep(
+                combiner=self.combiner_reduce_genres,
                 reducer=self.reducer_reduce_genres
             ),
         ]
@@ -84,12 +85,20 @@ class Assignment1C_sort_most_rated_genre(MRJob):
         for rating_generator, genre_generator in values_generator:
             #yield movieID, (genre_generator[1]) #development purposes
             for genreID in genre_generator[1]:
-                yield movieID, (genreID, rating_generator[1]) #ratings_list
+                yield movieID, (genreID, len(rating_generator[1])) #ratings_list
                 
-    def reducer_reduce_genres(self, _, values_generator):
+    def combiner_reduce_genres(self, _, values_generator):
         genre_rating_dictionary = {}
-        for genreID, rating_list in values_generator:
-            yield genreID, rating_list #development purposes
+        for genreID, rating_count in values_generator:
+            yield genreID, rating_count #development purposes
+        #     if genreID not in genre_rating_dictionary.keys():
+        #         genre_rating_dictionary.update({genreID:[]})
+
+        #     genre_rating_dictionary[genreID].extend(rating_list)
+        # yield None, genre_rating_dictionary
+
+    def reducer_reduce_genres(self, genreID, rating_count):
+            yield genreID, sum(rating_count) #development purposes
         #     if genreID not in genre_rating_dictionary.keys():
         #         genre_rating_dictionary.update({genreID:[]})
 
