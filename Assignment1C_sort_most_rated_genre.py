@@ -19,7 +19,7 @@ class Assignment1C_sort_most_rated_genre(MRJob):
                 mapper=self.mapper_get_datasets
             ),
             MRStep( 
-                mapper=self.generator_seperate_genres,
+                mapper=self.mapper_assign_each_genre_an_ID,
                 reducer=self.reducer_join_ratings_on_genreID
             ),
             MRStep(
@@ -56,9 +56,7 @@ class Assignment1C_sort_most_rated_genre(MRJob):
         else:
             yield 0, ("invalid input", line)
 
-
-
-    def generator_seperate_genres(self, movieID, values_list):
+    def mapper_assign_each_genre_an_ID(self, movieID, values_list):
         if values_list[0] == "metadata":
             genreID = 0
             for is_genre in values_list[-19:]:
@@ -69,8 +67,6 @@ class Assignment1C_sort_most_rated_genre(MRJob):
         else:
             yield movieID, values_list
 
-
-    # def combiner_join_ratings_on_genreID(self, movieID, values_generator):
     def reducer_join_ratings_on_genreID(self, movieID, values_generator):
         rating_list = []
         genre_list = []
@@ -85,21 +81,20 @@ class Assignment1C_sort_most_rated_genre(MRJob):
         yield movieID, (("rating", rating_list), ("genre", genre_list))
 
     def reducer_join_ratings_on_value(self, movieID, values_generator):
-
         for rating_generator, genre_generator in values_generator:
-            #yield movieID, (genre_generator[1]) #development purposes
-            for genreID in genre_generator[1]:
-                yield movieID, (genreID, len(rating_generator[1])) #ratings_list
+            rating_list = rating_generator[1]
+            genre_list = genre_generator[1]
+            #yield movieID, (genre_list) #development purposes
+            for genreID in genre_list:
+                yield movieID, (genreID, len(rating_list)) #ratings_list
                 
 
-    #####################    kan vervangen worden door sum bij  reducer_join_ratings_on_value?   
     def combiner_reduce_genres(self, _, values_generator):
         for genreID, rating_count in values_generator:
             yield genreID, rating_count
 
     def reducer_reduce_genres(self, genreID, rating_count):
         yield None, (genreID, sum(rating_count)) 
- #########################
 
     def reducer_sort_most_rated_genres(self, _, values_generator):
         #for genreID, rating_count in values_generator:
