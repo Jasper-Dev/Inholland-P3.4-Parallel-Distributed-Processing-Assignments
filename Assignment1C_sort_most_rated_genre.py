@@ -14,17 +14,19 @@ class Assignment1C_sort_most_rated_genre(MRJob):
         # instead of writing a script for each iteration, we can make use of steps.
         # with steps we specify all the steps mrjob needs to take and chain them together
         return [
-            MRStep( mapper=self.mapper_get_datasets),
-            MRStep( mapper=self.generator_seperate_genres,
-                    #  combiner=self.combiner_join_ratings_on_genreID#,
-                    # combiner=self.combiner_ratings_on_value,
-                    # reducer=self.reducer_ratings_on_value
-                    reducer=self.reducer_join_ratings_on_genreID
-                    
-                    # reducer=self.reducer_join_ratings_with_genres_on_movieID
+            MRStep(
+                mapper=self.mapper_get_datasets
             ),
-            MRStep(reducer=self.reducer_join_ratings_on_value),
-            MRStep(reducer=self.reducer_reduce_genres),
+            MRStep( 
+                mapper=self.generator_seperate_genres,
+                reducer=self.reducer_join_ratings_on_genreID
+            ),
+            MRStep(
+                reducer=self.reducer_join_ratings_on_value
+            ),
+            MRStep(
+                reducer=self.reducer_reduce_genres
+            ),
         ]
 
     # in order to know the amount of ratings per genre we need to join 2 datafiles u.data for the ratings and u.item for the movie details
@@ -90,7 +92,7 @@ class Assignment1C_sort_most_rated_genre(MRJob):
             if genreID not in genre_rating_dictionary.keys():
                 genre_rating_dictionary.update({genreID:[]})
 
-            genre_rating_dictionary[genreID].append(rating_list)
+            genre_rating_dictionary[genreID].extend(rating_list)
         yield None, genre_rating_dictionary
 
             
