@@ -89,11 +89,12 @@ class Assignment1C_sort_most_rated_genre(MRJob):
     def reducer_reduce_genres(self, _, values_generator):
         genre_rating_dictionary = {}
         for genreID, rating_list in values_generator:
-            if genreID not in genre_rating_dictionary.keys():
-                genre_rating_dictionary.update({genreID:[]})
+            yield genreID, rating_list #development purposes
+        #     if genreID not in genre_rating_dictionary.keys():
+        #         genre_rating_dictionary.update({genreID:[]})
 
-            genre_rating_dictionary[genreID].extend(rating_list)
-        yield None, genre_rating_dictionary
+        #     genre_rating_dictionary[genreID].extend(rating_list)
+        # yield None, genre_rating_dictionary
 
             
                                 
