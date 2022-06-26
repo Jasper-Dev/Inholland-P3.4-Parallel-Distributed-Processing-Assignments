@@ -6,7 +6,8 @@ class Assignment1C_sort_most_rated_genre(MRJob):
 
     #set constants
     SORT_VALUES = True
-    
+    GENRE_TYPES = ["unknown", "action", "adventure", "animation", "children", "comedy", "crime", "documentary", "drama", "fantasy", "film_noir", "horror", "musical", "mystery", "romance", "scifi", "thriller", "war", "western"]
+ 
 
 
     # initiate mrjobs steps
@@ -102,13 +103,13 @@ class Assignment1C_sort_most_rated_genre(MRJob):
 
     def reducer_sort_most_rated_genres(self, _, values_generator):
         #for genreID, rating_count in values_generator:
-        sorted_list = sorted(values_generator, key=lambda row: int(row[1]), reverse=True)
+        sorted_list = sorted(values_generator, key=lambda row: int(row[1]))
 
 
 
             # sort the list so the movieIDs are sorted in ASC order, this only works when the ID is cast to int, otherwise you're in for a whole bunch of shenanigans 😅
         for genreID, rating_count in sorted_list:
-            yield 'Genre: ' + str(genreID).rjust(2, ' '), str(rating_count).rjust(5, ' ') + ' ratings.'
+            yield 'Genre: ' + self.GENRE_TYPES[genreID] + " ID: "+ str(genreID).rjust(2, ' '), str(rating_count).rjust(5, ' ') + ' ratings.'
 
 
 
