@@ -24,10 +24,10 @@ class Assignment1C_sort_most_rated_genre(MRJob):
             MRStep(
                 reducer=self.reducer_join_ratings_on_value
             ),
-            # MRStep(
-            #     combiner=self.combiner_reduce_genres,
+            MRStep(
+                combiner=self.combiner_reduce_genres,
             #     reducer=self.reducer_reduce_genres
-            # ),
+            ),
             # MRStep(
             #     reducer=self.reducer_sort_most_rated_genres
             # ),
@@ -135,7 +135,15 @@ class Assignment1C_sort_most_rated_genre(MRJob):
             for genreID in genre_list:
                 yield movieID, (genreID, len(rating_list))
                 
+    ###
+    # In order to prepare the lines for the next reducer, we need to semi-reduce / combine the lines a bit.
+    # Before sending it over the network to the next reducer
 
+    # This combiner yields the following {key:value}-pairs
+    # {genreID:rating_count} 
+    # 5     10
+    # 18    10
+    ###
     def combiner_reduce_genres(self, _, values_generator):
         for genreID, rating_count in values_generator:
             yield genreID, rating_count
