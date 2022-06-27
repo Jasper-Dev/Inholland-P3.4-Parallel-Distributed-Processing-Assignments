@@ -6,7 +6,7 @@ class Assignment1C_sort_most_rated_genre(MRJob):
 
     #set constants
     GENRE_TYPES = ["unknown", "action", "adventure", "animation", "children", "comedy", "crime", "documentary", "drama", "fantasy", "film_noir", "horror", "musical", "mystery", "romance", "scifi", "thriller", "war", "western"]
- 
+    IS_FORMATTED_OUTPUT = True
 
 
     # define all the steps mrjobs need to take
@@ -26,11 +26,11 @@ class Assignment1C_sort_most_rated_genre(MRJob):
             ),
             MRStep(
                 combiner=self.combiner_reduce_genres,
-            #     reducer=self.reducer_reduce_genres
+                reducer=self.reducer_reduce_genres
             ),
-            # MRStep(
-            #     reducer=self.reducer_sort_most_rated_genres
-            # ),
+            MRStep(
+                reducer=self.reducer_sort_most_rated_genres
+            ),
         ]
 
     ###
@@ -148,22 +148,71 @@ class Assignment1C_sort_most_rated_genre(MRJob):
         for genreID, rating_count in values_generator:
             yield genreID, rating_count
 
+    ###
+    # After the combiner, the reducer can go ahead and reduce the list by
+    # - further summing up all the rating_counts 
+    # - and grouping them by genreID
+
+    # This reducer yields the following {key:value}-pairs (pasting full list, as its only 19 lines)
+    # {None:[genreID, rating_count]} 
+    # null	[5, 29832]
+    # null	[15, 12730]
+    # null	[16, 21872]
+    # null	[17, 9398]
+    # null	[18, 1854]
+    # null	[2, 13753]
+    # null	[3, 3605]
+    # null	[4, 7182]
+    # null	[0, 10]
+    # null	[1, 25589]
+    # null	[10, 1733]
+    # null	[11, 5317]
+    # null	[12, 4954]
+    # null	[13, 5245]
+    # null	[14, 19461]
+    # null	[6, 8055]
+    # null	[7, 758]
+    # null	[8, 39895]
+    # null	[9, 1352]
+    ###
     def reducer_reduce_genres(self, genreID, rating_count):
         yield None, (genreID, sum(rating_count)) 
 
+
+    ###
+    # At this point the list is thus far reduced that it only consists of the 19 genre_types (As we can see in the description of the previous reducer), 
+    # only thing to do now is sorting the list, so the most rated genre is up top and the least rated is at the bottom.
+
+    # This final sorter reducer yields the following formatted string,
+    # if the formatted output is not desired it can be turned off by setting the IS_FORMATTED_OUTPUT constant to False
+    # "Genre: drama       with ID:  8 is rated:"	"39895 times."
+    # "Genre: comedy      with ID:  5 is rated:"	"29832 times."
+    # "Genre: action      with ID:  1 is rated:"	"25589 times."
+    # "Genre: thriller    with ID: 16 is rated:"	"21872 times."
+    # "Genre: romance     with ID: 14 is rated:"	"19461 times."
+    # "Genre: adventure   with ID:  2 is rated:"	"13753 times."
+    # "Genre: scifi       with ID: 15 is rated:"	"12730 times."
+    # "Genre: war         with ID: 17 is rated:"	" 9398 times."
+    # "Genre: crime       with ID:  6 is rated:"	" 8055 times."
+    # "Genre: children    with ID:  4 is rated:"	" 7182 times."
+    # "Genre: horror      with ID: 11 is rated:"	" 5317 times."
+    # "Genre: mystery     with ID: 13 is rated:"	" 5245 times."
+    # "Genre: musical     with ID: 12 is rated:"	" 4954 times."
+    # "Genre: animation   with ID:  3 is rated:"	" 3605 times."
+    # "Genre: western     with ID: 18 is rated:"	" 1854 times."
+    # "Genre: film_noir   with ID: 10 is rated:"	" 1733 times."
+    # "Genre: fantasy     with ID:  9 is rated:"	" 1352 times."
+    # "Genre: documentary with ID:  7 is rated:"	"  758 times."
+    # "Genre: unknown     with ID:  0 is rated:"	"   10 times."
+    ###
     def reducer_sort_most_rated_genres(self, _, values_generator):
-        #for genreID, rating_count in values_generator:
+        # sort the list so the rating_counts are sorted in DESC order, this only works when the sortingkey is cast to an int, otherwise you're in for a whole bunch of shenanigans 😅
         sorted_list = sorted(values_generator, key=lambda row: int(row[1]), reverse=True)
-
-
-
-            # sort the list so the movieIDs are sorted in ASC order, this only works when the ID is cast to int, otherwise you're in for a whole bunch of shenanigans 😅
         for genreID, rating_count in sorted_list:
-           
-            yield 'Genre: ' + self.GENRE_TYPES[genreID].ljust(11, ' ') + " with ID: "+ str(genreID).rjust(2, ' ') + " is rated:", str(rating_count).rjust(5, ' ') + ' times.'
-
-
-
+            if self.IS_FORMATTED_OUTPUT:
+                yield 'Genre: ' + self.GENRE_TYPES[genreID].ljust(11, ' ') + " with ID: "+ str(genreID).rjust(2, ' ') + " is rated:", str(rating_count).rjust(5, ' ') + ' times.'
+            else:
+               yield genreID, rating_count
 
 if __name__ == '__main__':
     Assignment1C_sort_most_rated_genre.run()
