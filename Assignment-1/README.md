@@ -685,7 +685,7 @@ if __name__ == '__main__':
 ### <a name="6.3."></a>**6.3. Assignment1C_sort_most_rated_genre.py**
 #### <a name="6.3.1."></a>**6.3.1 Result**
 #### <a name="6.3.2."></a>**6.3.2 Screenshot**
-![Assignment1C Hive SQL](/.md-attachments/images/Assignment1C_HIVE.png")
+![Assignment1C Hive SQL](/assets/images/Assignment1C_HIVE.png")
 
 ![The San Juan Mountains are beautiful!](/assets/images/san-juan-mountains.jpg "San Juan Mountains")
 
