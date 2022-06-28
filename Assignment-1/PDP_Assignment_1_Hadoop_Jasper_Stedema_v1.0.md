@@ -573,7 +573,7 @@ class Assignment1C_sort_most_rated_genre(MRJob):
                 yield movieID, (genreID, len(rating_list))
 ```
 
-```python               
+```python
     ###
     # In order to prepare the lines for the next reducer, we need to semi-reduce / combine the lines a bit.
     # Before sending it over the network to the next reducer
@@ -662,12 +662,10 @@ if __name__ == '__main__':
     Assignment1C_sort_most_rated_genre.run()
 ``` 
 
-
-
-
 ## <a name="6."></a>**6. Assignments - Screenshots & Results**
-[6. Assignments - Screenshots & Results](#6.) 
-5. Assignments - Code & Explanation
+
+[5. Assignments - Code & Explanation](#5)
+
 
 - assignment A (Assignment1A_Ratings.py) is the base assignment for a grade 6/10
 - assignment B (Assignment1B_show_and_sort.py) is an extra assignment to score 2 extra points on the grade
