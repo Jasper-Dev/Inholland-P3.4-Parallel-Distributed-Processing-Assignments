@@ -673,7 +673,25 @@ if __name__ == '__main__':
 #### <a name="6.1.1."></a>**6.1.1 Result**
 
 ```Text
-
+"MovieID:    1" " 452 ratings."
+"MovieID:    2" " 131 ratings."
+"MovieID:    3" "  90 ratings."
+"MovieID:    4" " 209 ratings."
+"MovieID:    5" "  86 ratings."
+"MovieID:    6" "  26 ratings."
+"MovieID:    7" " 392 ratings."
+"MovieID:    8" " 219 ratings."
+"MovieID:    9" " 299 ratings."
+"MovieID:   10" "  89 ratings."
+"MovieID:   11" " 236 ratings."
+"MovieID:   12" " 267 ratings."
+"MovieID:   13" " 184 ratings."
+"MovieID:   14" " 183 ratings."
+"MovieID:   15" " 293 ratings."
+"MovieID:   16" "  39 ratings."
+"MovieID:   17" "  92 ratings."
+"MovieID:   18" "  10 ratings."
+"MovieID:   19" "  69 ratings."
 ```
 
 #### <a name="6.1.2."></a>**6.1.2 Screenshot**
@@ -687,7 +705,25 @@ if __name__ == '__main__':
 #### <a name="6.2.1."></a>**6.2.1 Result**
 
 ```Text
-
+"MovieID:   50" " 583 ratings."
+"MovieID:  258" " 509 ratings."
+"MovieID:  100" " 508 ratings."
+"MovieID:  181" " 507 ratings."
+"MovieID:  294" " 485 ratings."
+"MovieID:  286" " 481 ratings."
+"MovieID:  288" " 478 ratings."
+"MovieID:    1" " 452 ratings."
+"MovieID:  300" " 431 ratings."
+"MovieID:  121" " 429 ratings."
+"MovieID:  174" " 420 ratings."
+"MovieID:  127" " 413 ratings."
+"MovieID:   56" " 394 ratings."
+"MovieID:    7" " 392 ratings."
+"MovieID:   98" " 390 ratings."
+"MovieID:  237" " 384 ratings."
+"MovieID:  117" " 378 ratings."
+"MovieID:  172" " 367 ratings."
+"MovieID:  222" " 365 ratings."
 ```
 
 #### <a name="6.2.2."></a>**6.2.2 Screenshot**
