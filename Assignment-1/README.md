@@ -682,8 +682,6 @@ if __name__ == '__main__':
 
 ![Assignment1A MRJob CLI](Assignment-A/Screenshots/Assignment1A_MRJOB_CLI.png "Assignment1A MRJob CLI")
 
-![Assignment1A MRJob File](Assignment-A/Screenshots/Assignment1A_MRJOB_FILE.png "Assignment1A MRJob File")
-
 ### <a name="6.2."></a>**6.2. Assignment1B_show_and_sort.py**
 
 #### <a name="6.2.1."></a>**6.2.1 Result**
@@ -697,8 +695,6 @@ if __name__ == '__main__':
 ![Assignment1B Hive SQL](Assignment-B/Screenshots/Assignment1B_HIVE.png "Assignment1B Hive SQL")
 
 ![Assignment1B MRJob CLI](Assignment-B/Screenshots/Assignment1B_MRJOB_CLI.png "Assignment1B MRJob CLI")
-
-![Assignment1B MRJob File](Assignment-B/Screenshots/Assignment1B_MRJOB_FILE.png "Assignment1B MRJob File")
 
 ### <a name="6.3."></a>**6.3. Assignment1C_sort_most_rated_genre.py**
 
@@ -731,5 +727,3 @@ if __name__ == '__main__':
 ![Assignment1C Hive SQL](Assignment-C/Screenshots/Assignment1C_HIVE.png "Assignment1C Hive SQL")
 
 ![Assignment1C MRJob CLI](Assignment-C/Screenshots/Assignment1C_MRJOB_CLI.png "Assignment1C MRJob CLI")
-
-![Assignment1C MRJob File](Assignment-C/Screenshots/Assignment1C_MRJOB_FILE.png "Assignment1C MRJob File")
