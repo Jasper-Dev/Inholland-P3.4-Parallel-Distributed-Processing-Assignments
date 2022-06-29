@@ -696,7 +696,11 @@ if __name__ == '__main__':
 
 #### <a name="6.1.2."></a>**6.1.2 Screenshot**
 
+_Assignment1A Hive SQL_
+
 ![Assignment1A Hive SQL](Assignment-A/Screenshots/Assignment1A_HIVE.png "Assignment1A Hive SQL")
+
+_Assignment1A MRJob CLI_
 
 ![Assignment1A MRJob CLI](Assignment-A/Screenshots/Assignment1A_MRJOB_CLI.png "Assignment1A MRJob CLI")
 
@@ -728,7 +732,11 @@ if __name__ == '__main__':
 
 #### <a name="6.2.2."></a>**6.2.2 Screenshot**
 
+_Assignment1B Hive SQL_
+
 ![Assignment1B Hive SQL](Assignment-B/Screenshots/Assignment1B_HIVE.png "Assignment1B Hive SQL")
+
+_Assignment1B MRJob CLI_
 
 ![Assignment1B MRJob CLI](Assignment-B/Screenshots/Assignment1B_MRJOB_CLI.png "Assignment1B MRJob CLI")
 
@@ -760,6 +768,11 @@ if __name__ == '__main__':
 
 #### <a name="6.3.2."></a>**6.3.2 Screenshot**
 
+
+_Assignment1C Hive SQL_
+
 ![Assignment1C Hive SQL](Assignment-C/Screenshots/Assignment1C_HIVE.png "Assignment1C Hive SQL")
+
+_Assignment1C MRJob CLI_
 
 ![Assignment1C MRJob CLI](Assignment-C/Screenshots/Assignment1C_MRJOB_CLI.png "Assignment1C MRJob CLI")
