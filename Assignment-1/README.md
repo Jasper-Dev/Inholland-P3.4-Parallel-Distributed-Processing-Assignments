@@ -268,8 +268,7 @@ as there is more documentation available on Hive.
 SELECT movie_id, count(movie_id) as ratingCount
 FROM movie_ratings
 GROUP BY movie_id
-ORDER BY ratingCount
-DESC;
+ORDER BY ratingCount DESC;
 ```
 
 #### <a name="5.2.2."></a>**5.2.2. MRJobs & MRSteps**
@@ -475,10 +474,10 @@ class Assignment1C_sort_most_rated_genre(MRJob):
 
     # this mapper yields the following {key:value}-pairs
     # {movieID:["rating", rating_value]} 
-    # "1000"	["rating", "3"]
+    # "1000" ["rating", "3"]
 
     # {movieID:["metadata", genre_value1, genre_value2, genre_value3...]}
-    # "1000"	["metadata", "0", "0", "0", "0", "0", "1", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "1"]
+    # "1000" ["metadata", "0", "0", "0", "0", "0", "1", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "0", "1"]
     ###
     def mapper_get_datasets(self, _, line):
         TAB_DELIMITER = "\t"
@@ -507,11 +506,11 @@ class Assignment1C_sort_most_rated_genre(MRJob):
 
     # this mapper yields the following {key:value}-pairs
     # {movieID:["genre", genreID]} 
-    # "1000"	["genre", 5]
-    # "1000"	["genre", 18]
+    # "1000" ["genre", 5]
+    # "1000" ["genre", 18]
 
     # {movieID:["rating", rating_value]}
-    # "1000"	["rating", "3"]
+    # "1000" ["rating", "3"]
     ###
     def mapper_assign_each_genre_an_ID(self, movieID, values_list):
         if values_list[0] == "metadata":
@@ -533,7 +532,7 @@ class Assignment1C_sort_most_rated_genre(MRJob):
 
     # This reducer yields the following {key:value}-pairs
     # {movie_id:[["rating", [rating_value1, rating_value2, rating_value3...]], ["genre", [genreID1, genreID2, genreID3...]]]} 
-    # "1000"	[["rating", ["2", "3", "3", "3", "2", "3", "3", "4", "3", "4"]], ["genre", [5, 18]]]
+    # "1000" [["rating", ["2", "3", "3", "3", "2", "3", "3", "4", "3", "4"]], ["genre", [5, 18]]]
     ###
     def reducer_join_ratings_and_genres_on_movieID(self, movieID, values_generator):
         rating_list = []
@@ -560,8 +559,8 @@ class Assignment1C_sort_most_rated_genre(MRJob):
 
     # This reducer yields the following {key:value}-pairs
     # {movie_id:[genreID, rating_count]} 
-    # "1000"	[5, 10]
-    # "1000"	[18, 10]
+    # "1000" [5, 10]
+    # "1000" [18, 10]
     ###
     def reducer_join_ratings_on_value(self, movieID, values_generator):
         for rating_generator, genre_generator in values_generator:
@@ -595,25 +594,25 @@ class Assignment1C_sort_most_rated_genre(MRJob):
 
     # This reducer yields the following {key:value}-pairs (pasting full list, as its only 19 lines)
     # {None:[genreID, rating_count]} 
-    # null	[5, 29832]
-    # null	[15, 12730]
-    # null	[16, 21872]
-    # null	[17, 9398]
-    # null	[18, 1854]
-    # null	[2, 13753]
-    # null	[3, 3605]
-    # null	[4, 7182]
-    # null	[0, 10]
-    # null	[1, 25589]
-    # null	[10, 1733]
-    # null	[11, 5317]
-    # null	[12, 4954]
-    # null	[13, 5245]
-    # null	[14, 19461]
-    # null	[6, 8055]
-    # null	[7, 758]
-    # null	[8, 39895]
-    # null	[9, 1352]
+    # null [5, 29832]
+    # null [15, 12730]
+    # null [16, 21872]
+    # null [17, 9398]
+    # null [18, 1854]
+    # null [2, 13753]
+    # null [3, 3605]
+    # null [4, 7182]
+    # null [0, 10]
+    # null [1, 25589]
+    # null [10, 1733]
+    # null [11, 5317]
+    # null [12, 4954]
+    # null [13, 5245]
+    # null [14, 19461]
+    # null [6, 8055]
+    # null [7, 758]
+    # null [8, 39895]
+    # null [9, 1352]
     ###
     def reducer_reduce_genres(self, genreID, rating_count):
         yield None, (genreID, sum(rating_count)) 
@@ -626,25 +625,25 @@ class Assignment1C_sort_most_rated_genre(MRJob):
 
     # This final sorter reducer yields the following formatted string,
     # if the formatted output is not desired it can be turned off by setting the IS_FORMATTED_OUTPUT constant to False
-    # "Genre: drama       with ID:  8 is rated:"	"39895 times."
-    # "Genre: comedy      with ID:  5 is rated:"	"29832 times."
-    # "Genre: action      with ID:  1 is rated:"	"25589 times."
-    # "Genre: thriller    with ID: 16 is rated:"	"21872 times."
-    # "Genre: romance     with ID: 14 is rated:"	"19461 times."
-    # "Genre: adventure   with ID:  2 is rated:"	"13753 times."
-    # "Genre: scifi       with ID: 15 is rated:"	"12730 times."
-    # "Genre: war         with ID: 17 is rated:"	" 9398 times."
-    # "Genre: crime       with ID:  6 is rated:"	" 8055 times."
-    # "Genre: children    with ID:  4 is rated:"	" 7182 times."
-    # "Genre: horror      with ID: 11 is rated:"	" 5317 times."
-    # "Genre: mystery     with ID: 13 is rated:"	" 5245 times."
-    # "Genre: musical     with ID: 12 is rated:"	" 4954 times."
-    # "Genre: animation   with ID:  3 is rated:"	" 3605 times."
-    # "Genre: western     with ID: 18 is rated:"	" 1854 times."
-    # "Genre: film_noir   with ID: 10 is rated:"	" 1733 times."
-    # "Genre: fantasy     with ID:  9 is rated:"	" 1352 times."
-    # "Genre: documentary with ID:  7 is rated:"	"  758 times."
-    # "Genre: unknown     with ID:  0 is rated:"	"   10 times."
+    # "Genre: drama       with ID:  8 is rated:" "39895 times."
+    # "Genre: comedy      with ID:  5 is rated:" "29832 times."
+    # "Genre: action      with ID:  1 is rated:" "25589 times."
+    # "Genre: thriller    with ID: 16 is rated:" "21872 times."
+    # "Genre: romance     with ID: 14 is rated:" "19461 times."
+    # "Genre: adventure   with ID:  2 is rated:" "13753 times."
+    # "Genre: scifi       with ID: 15 is rated:" "12730 times."
+    # "Genre: war         with ID: 17 is rated:" " 9398 times."
+    # "Genre: crime       with ID:  6 is rated:" " 8055 times."
+    # "Genre: children    with ID:  4 is rated:" " 7182 times."
+    # "Genre: horror      with ID: 11 is rated:" " 5317 times."
+    # "Genre: mystery     with ID: 13 is rated:" " 5245 times."
+    # "Genre: musical     with ID: 12 is rated:" " 4954 times."
+    # "Genre: animation   with ID:  3 is rated:" " 3605 times."
+    # "Genre: western     with ID: 18 is rated:" " 1854 times."
+    # "Genre: film_noir   with ID: 10 is rated:" " 1733 times."
+    # "Genre: fantasy     with ID:  9 is rated:" " 1352 times."
+    # "Genre: documentary with ID:  7 is rated:" "  758 times."
+    # "Genre: unknown     with ID:  0 is rated:" "   10 times."
     ###
     def reducer_sort_most_rated_genres(self, _, values_generator):
         # sort the list so the rating_counts are sorted in DESC order, this only works when the sortingkey is cast to an int, otherwise you're in for a whole bunch of shenanigans 😅
@@ -659,17 +658,15 @@ class Assignment1C_sort_most_rated_genre(MRJob):
 ```python
 if __name__ == '__main__':
     Assignment1C_sort_most_rated_genre.run()
-``` 
+```
 
 ## <a name="6."></a>**6. Assignments - Screenshots & Results**
 
 [5. Assignments - Code & Explanation](#5)
 
-
 - assignment A (Assignment1A_Ratings.py) is the base assignment for a grade 6/10
 - assignment B (Assignment1B_show_and_sort.py) is an extra assignment to score 2 extra points on the grade
 - assignment C (Assignment1C_sort_most_rated_genre.py) is an extra assignment to score 2 extra points on the grade
-
 
 ### <a name="6.1."></a>**6.1. Assignment1A_Ratings.py**
 
@@ -706,6 +703,7 @@ if __name__ == '__main__':
 ### <a name="6.3."></a>**6.3. Assignment1C_sort_most_rated_genre.py**
 
 #### <a name="6.3.1."></a>**6.3.1 Result**
+
 ```Text
 "Genre: drama       with ID:  8 is rated:" "39895 times."
 "Genre: comedy      with ID:  5 is rated:" "29832 times."
@@ -727,6 +725,7 @@ if __name__ == '__main__':
 "Genre: documentary with ID:  7 is rated:" "  758 times."
 "Genre: unknown     with ID:  0 is rated:" "   10 times."
 ```
+
 #### <a name="6.3.2."></a>**6.3.2 Screenshot**
 
 ![Assignment1C Hive SQL](Assignment-C/Screenshots/Assignment1C_HIVE.png "Assignment1C Hive SQL")
@@ -734,4 +733,3 @@ if __name__ == '__main__':
 ![Assignment1C MRJob CLI](Assignment-C/Screenshots/Assignment1C_MRJOB_CLI.png "Assignment1C MRJob CLI")
 
 ![Assignment1C MRJob File](Assignment-C/Screenshots/Assignment1C_MRJOB_FILE.png "Assignment1C MRJob File")
-
