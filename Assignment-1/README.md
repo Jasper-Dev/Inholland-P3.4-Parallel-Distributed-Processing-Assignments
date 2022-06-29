@@ -174,8 +174,7 @@ as there is more documentation available on Hive.
 SELECT movie_id, count(movie_id) as ratingCount
 FROM movie_ratings
 GROUP BY movie_id
-ORDER BY movie_id
-ASC;
+ORDER BY movie_id ASC;
 ```
 
 #### <a name="5.1.2."></a>**5.1.2. MRJobs & MRSteps**
@@ -675,39 +674,64 @@ if __name__ == '__main__':
 ### <a name="6.1."></a>**6.1. Assignment1A_Ratings.py**
 
 #### <a name="6.1.1."></a>**6.1.1 Result**
-<!-- ![Assignment1C Hive SQL](assets/images/1A/Assignment1A_HIVE.png "Assignment1A Hive SQL") -->
+
+```Text
+
+```
 
 #### <a name="6.1.2."></a>**6.1.2 Screenshot**
 
-![Assignment1A Hive SQL](assets/images/1A/Assignment1A_HIVE.png "Assignment1A Hive SQL")
+![Assignment1A Hive SQL](Assignment-A/Screenshots/Assignment1A_HIVE.png "Assignment1A Hive SQL")
 
-![Assignment1A MRJob CLI](assets/images/1A/Assignment1A_MRJOB_CLI.png "Assignment1A MRJob CLI")
+![Assignment1A MRJob CLI](Assignment-A/Screenshots/Assignment1A_MRJOB_CLI.png "Assignment1A MRJob CLI")
 
-![Assignment1A MRJob File](assets/images/1A/Assignment1A_MRJOB_FILE.png "Assignment1A MRJob File")
+![Assignment1A MRJob File](Assignment-A/Screenshots/Assignment1A_MRJOB_FILE.png "Assignment1A MRJob File")
 
 ### <a name="6.2."></a>**6.2. Assignment1B_show_and_sort.py**
 
 #### <a name="6.2.1."></a>**6.2.1 Result**
 
+```Text
+
+```
+
 #### <a name="6.2.2."></a>**6.2.2 Screenshot**
 
-![Assignment1B Hive SQL](assets/images/1B/Assignment1B_HIVE.png "Assignment1B Hive SQL")
+![Assignment1B Hive SQL](Assignment-B/Screenshots/Assignment1B_HIVE.png "Assignment1B Hive SQL")
 
-![Assignment1B MRJob CLI](assets/images/1B/Assignment1B_MRJOB_CLI.png "Assignment1B MRJob CLI")
+![Assignment1B MRJob CLI](Assignment-B/Screenshots/Assignment1B_MRJOB_CLI.png "Assignment1B MRJob CLI")
 
-![Assignment1B MRJob File](assets/images/1B/Assignment1B_MRJOB_FILE.png "Assignment1B MRJob File")
+![Assignment1B MRJob File](Assignment-B/Screenshots/Assignment1B_MRJOB_FILE.png "Assignment1B MRJob File")
 
 ### <a name="6.3."></a>**6.3. Assignment1C_sort_most_rated_genre.py**
 
 #### <a name="6.3.1."></a>**6.3.1 Result**
 ```Text
-
+"Genre: drama       with ID:  8 is rated:" "39895 times."
+"Genre: comedy      with ID:  5 is rated:" "29832 times."
+"Genre: action      with ID:  1 is rated:" "25589 times."
+"Genre: thriller    with ID: 16 is rated:" "21872 times."
+"Genre: romance     with ID: 14 is rated:" "19461 times."
+"Genre: adventure   with ID:  2 is rated:" "13753 times."
+"Genre: scifi       with ID: 15 is rated:" "12730 times."
+"Genre: war         with ID: 17 is rated:" " 9398 times."
+"Genre: crime       with ID:  6 is rated:" " 8055 times."
+"Genre: children    with ID:  4 is rated:" " 7182 times."
+"Genre: horror      with ID: 11 is rated:" " 5317 times."
+"Genre: mystery     with ID: 13 is rated:" " 5245 times."
+"Genre: musical     with ID: 12 is rated:" " 4954 times."
+"Genre: animation   with ID:  3 is rated:" " 3605 times."
+"Genre: western     with ID: 18 is rated:" " 1854 times."
+"Genre: film_noir   with ID: 10 is rated:" " 1733 times."
+"Genre: fantasy     with ID:  9 is rated:" " 1352 times."
+"Genre: documentary with ID:  7 is rated:" "  758 times."
+"Genre: unknown     with ID:  0 is rated:" "   10 times."
 ```
 #### <a name="6.3.2."></a>**6.3.2 Screenshot**
 
-![Assignment1C Hive SQL](assets/images/1C/Assignment1C_HIVE.png "Assignment1C Hive SQL")
+![Assignment1C Hive SQL](Assignment-C/Screenshots/Assignment1C_HIVE.png "Assignment1C Hive SQL")
 
-![Assignment1C MRJob CLI](assets/images/1C/Assignment1C_MRJOB_CLI.png "Assignment1C MRJob CLI")
+![Assignment1C MRJob CLI](Assignment-C/Screenshots/Assignment1C_MRJOB_CLI.png "Assignment1C MRJob CLI")
 
-![Assignment1C MRJob File](assets/images/1C/Assignment1C_MRJOB_FILE.png "Assignment1C MRJob File")
+![Assignment1C MRJob File](Assignment-C/Screenshots/Assignment1C_MRJOB_FILE.png "Assignment1C MRJob File")
 
