@@ -25,11 +25,11 @@ wget http://witan.nl/hadoop/u.data --no-check-certificate
 ### <a name="2.2."></a>**2.2. Run the Python script**
 
 ```bash
-#place the scripts inside the ‘scripts’ folder (I did this with WinSCP, but you are free to do it your own way) and run the python scripts
+#place the script inside the ‘scripts’ folder (I did this with WinSCP, but you are free to do it your own way) and run the python script
 python3.8 scripts/Assignment1B_show_and_sort.py data/u.data
 
 # to output the results to a timestamped file, append the command with the following line:
-[..command..] > `date +%Y.%m.%d-%H.%M.%S`-output-Assigment-[nr].txt
+[..command..] > `date +%Y.%m.%d-%H.%M.%S`-MRJob-output-Assigment-B.txt
 
 #example:
 python3.8 scripts/Assignment1B_show_and_sort.py data/u.data > output/`date +%Y.%m.%d-%H.%M.%S`-MRJob-output-Assigment-B.txt
