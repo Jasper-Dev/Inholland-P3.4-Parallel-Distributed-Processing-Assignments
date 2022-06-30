@@ -40,7 +40,7 @@ python3.8 scripts/Assignment1C_sort_most_rated_genre.py data/u.data data/u.item 
 
 In this chapter, you can find the SQL query and the Python code used to answer assignment-1C aswell as the explanation for the Python code in the form of commands.
 
-The results and screenshots of those results can be found in chapter [4. Screenshots & Results](#4.)
+The results and screenshots of those results can be found in chapter [4. Results & Screenshots](#4.)
 
 ### <a name="3.1."></a>**3.1. Hive query**
 
@@ -341,7 +341,7 @@ if __name__ == '__main__':
     Assignment1C_sort_most_rated_genre.run()
 ```
 
-## <a name="4."></a>**4. Screenshots & Results**
+## <a name="4."></a>**4. Results & Screenshots**
 
 - assignment C (Assignment1C_sort_most_rated_genre.py) is an extra assignment to score 2 extra points on the grade
 

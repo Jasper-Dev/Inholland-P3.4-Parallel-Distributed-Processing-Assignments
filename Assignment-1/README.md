@@ -160,7 +160,7 @@ python3.8 scripts/Assignment1C_sort_most_rated_genre.py data/u.data data/u.item 
 
 In this chapter, you can find the SQL queries and the Python code used to answer the assignments aswell as the explanation for the Python code in the form of commands. These commands can also be found within the python scripts themselves. They are included in both locations, for the sake of complete documentation.
 
-The results and screenshots of the results can be found in chapter [6. Assignments - Screenshots & Results](#6.)
+The results and screenshots of those results can be found in chapter [6. Assignments - Results & Screenshots](#6.)
 
 ### <a name="5.1."></a>**5.1. Assignment1A_Ratings.py**
 
@@ -658,9 +658,9 @@ if __name__ == '__main__':
     Assignment1C_sort_most_rated_genre.run()
 ```
 
-## <a name="6."></a>**6. Assignments - Screenshots & Results**
+## <a name="6."></a>**6. Assignments - Results & Screenshots**
 
-[5. Assignments - Code & Explanation](#5)
+This chapter only has the Results and Screenshots, in order to see chapter [5. Assignments - Code & Explanation](#5.)
 
 - assignment A (Assignment1A_Ratings.py) is the base assignment for a grade 6/10
 - assignment B (Assignment1B_show_and_sort.py) is an extra assignment to score 2 extra points on the grade
@@ -668,7 +668,7 @@ if __name__ == '__main__':
 
 ### <a name="6.1."></a>**6.1. Assignment1A_Ratings.py**
 
-#### <a name="6.1.1."></a>**6.1.1 Result**
+#### <a name="6.1.1."></a>**6.1.1 Results**
 
 ```Text
 "MovieID:    1" " 452 ratings."
@@ -692,7 +692,7 @@ if __name__ == '__main__':
 "MovieID:   19" "  69 ratings."
 ```
 
-#### <a name="6.1.2."></a>**6.1.2 Screenshot**
+#### <a name="6.1.2."></a>**6.1.2 Screenshots**
 
 _Assignment1A Hive SQL_
 
@@ -704,7 +704,7 @@ _Assignment1A MRJob CLI_
 
 ### <a name="6.2."></a>**6.2. Assignment1B_show_and_sort.py**
 
-#### <a name="6.2.1."></a>**6.2.1 Result**
+#### <a name="6.2.1."></a>**6.2.1 Results**
 
 ```Text
 "MovieID:   50" " 583 ratings."
@@ -728,7 +728,7 @@ _Assignment1A MRJob CLI_
 "MovieID:  222" " 365 ratings."
 ```
 
-#### <a name="6.2.2."></a>**6.2.2 Screenshot**
+#### <a name="6.2.2."></a>**6.2.2 Screenshots**
 
 _Assignment1B Hive SQL_
 
@@ -740,7 +740,7 @@ _Assignment1B MRJob CLI_
 
 ### <a name="6.3."></a>**6.3. Assignment1C_sort_most_rated_genre.py**
 
-#### <a name="6.3.1."></a>**6.3.1 Result**
+#### <a name="6.3.1."></a>**6.3.1 Results**
 
 ```Text
 "Genre: drama       with ID:  8 is rated:" "39895 times."
@@ -764,7 +764,7 @@ _Assignment1B MRJob CLI_
 "Genre: unknown     with ID:  0 is rated:" "   10 times."
 ```
 
-#### <a name="6.3.2."></a>**6.3.2 Screenshot**
+#### <a name="6.3.2."></a>**6.3.2 Screenshots**
 
 _Assignment1C Hive SQL_
 
