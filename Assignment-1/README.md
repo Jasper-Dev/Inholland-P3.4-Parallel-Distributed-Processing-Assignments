@@ -179,7 +179,7 @@ ORDER BY movie_id ASC;
 
 #### <a name="5.1.2."></a>**5.1.2. MRJobs & MRSteps**
 
-Now we know how our data needs to look like, we can begin writing our Python code for the Assingment1A.
+Now we know how our data needs to look like, we can begin writing our Python code for the Assignment1A.
 
 ```python
 from mrjob.job import MRJob
@@ -273,7 +273,7 @@ ORDER BY ratingCount DESC;
 
 #### <a name="5.2.2."></a>**5.2.2. MRJobs & MRSteps**
 
-Now we know how our data needs to look like, we can begin writing our Python code for the Assingment1B. <br>
+Now we know how our data needs to look like, we can begin writing our Python code for the Assignment1B. <br>
 As this is the extra / B assignment in order to get an grade 8, i'm only going to provide detailed comments on the parts that are different from the base assigment A
 
 ```python
@@ -419,13 +419,13 @@ GROUP BY CASE
 
 #### <a name="5.3.2."></a>**5.3.2. MRJobs & MRSteps**
 
-because the extra / C assignment is vastly different than the extra B assingment, i'm going to provide all detailed comments eventho it's possible I already described them in assignment A or B
+because the extra / C assignment is vastly different than the extra B assignment, i'm going to provide all detailed comments eventho it's possible I already described them in assignment A or B
 
 ```python
 from mrjob.job import MRJob
 from mrjob.step import MRStep
 
-# because the extra / C assignment is vastly different than the extra B assingment, i'm going to provide all detailed comments eventho it's possible I already described them in assignment A or B
+# because the extra / C assignment is vastly different than the extra B assignment, i'm going to provide all detailed comments eventho it's possible I already described them in assignment A or B
 class Assignment1C_sort_most_rated_genre(MRJob):
 ```
 
