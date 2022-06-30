@@ -150,10 +150,10 @@ python3.8 scripts/Assignment1B_show_and_sort.py data/u.data
 python3.8 scripts/Assignment1C_sort_most_rated_genre.py data/u.data data/u.item
 
 # to output the results to a timestamped file, append command with the following line:
-[..command..] > `date +%Y.%m.%d-%H.%M.%S`-output-Assigment-[nr].txt
+[..command..] > `date +%Y.%m.%d-%H.%M.%S`-MRJob-output-Assigment-[nr].txt
 
 #example:
-python3.8 scripts/Assignment1C_sort_most_rated_genre.py data/u.data data/u.item > output/`date +%Y.%m.%d-%H.%M.%S`-output-Assigment-C.txt
+python3.8 scripts/Assignment1C_sort_most_rated_genre.py data/u.data data/u.item > output/`date +%Y.%m.%d-%H.%M.%S`-MRJob-output-Assigment-C.txt
 ```
 
 ## <a name="5."></a>**5. Assignments - Code & Explanation**
@@ -363,9 +363,7 @@ if __name__ == '__main__':
 
 #### <a name="5.3.1."></a>**5.3.1. Hive query**
 
-in order to have an essence on how our data is going to look like,
-it is key to first write the query in Hive. This will run faster and troubleshooting is easier,
-as there is more documentation available on Hive  
+In order to have an essence on how our data is going to look like, it is key to first write the query in Hive. This will run faster and troubleshooting is easier, as there is more documentation available on Hive  
 
 ```SQL
 SELECT 
@@ -767,7 +765,6 @@ _Assignment1B MRJob CLI_
 ```
 
 #### <a name="6.3.2."></a>**6.3.2 Screenshot**
-
 
 _Assignment1C Hive SQL_
 
