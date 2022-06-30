@@ -28,8 +28,7 @@ wget http://witan.nl/hadoop/u.data --no-check-certificate
 #place the scripts inside the ‘scripts’ folder (I did this with WinSCP, but you are free to do it your own way) and run the python scripts
 python3.8 scripts/Assignment1B_show_and_sort.py data/u.data
 
-
-# to output the results to a timestamped file, append command with the following line:
+# to output the results to a timestamped file, append the command with the following line:
 [..command..] > `date +%Y.%m.%d-%H.%M.%S`-output-Assigment-[nr].txt
 
 #example:
@@ -37,7 +36,6 @@ python3.8 scripts/Assignment1B_show_and_sort.py data/u.data > output/`date +%Y.%
 ```
 
 ## <a name="3."></a>**3. Code & Explanation**
-
 
 In this chapter, you can find the SQL query and the Python code used to answer assignment-1B aswell as the explanation for the Python code in the form of commands.
 
