@@ -32,7 +32,7 @@ python3.8 scripts/Assignment1A_Ratings.py data/u.data
 [..command..] > `date +%Y.%m.%d-%H.%M.%S`-output-Assigment-[nr].txt
 
 #example:
-python3.8 scripts/Assignment1A_Ratings.py data/u.data > output/`date +%Y.%m.%d-%H.%M.%S`MRJob-output-Assigment-A.txt
+python3.8 scripts/Assignment1A_Ratings.py data/u.data > output/`date +%Y.%m.%d-%H.%M.%S`-MRJob-output-Assigment-A.txt
 ```
 
 ## <a name="3."></a>**3. Code & Explanation**
