@@ -1,4 +1,4 @@
-# <a name="title"></a>**Inholland-P4.4-Parallel-Distributed-Processing-Assignments**
+# **Assignment 2 – Parallel Distributed Processing**
 
 ## <a name="1."></a>**1. Student details**
 
@@ -6,7 +6,7 @@
 |:-------|:-----------------------------------------------------------------------------------------|
 |Name:   |Jasper Stedema                                                                            |
 |Number: |621642                                                                                    |
-|Github: |<https://github.com/Jasper-Dev/Inholland-P4.4-Parallel-Distributed-Processing-Assignments>|
+|Github: |<https://github.com/Jasper-Dev/Inholland-P3.4-Parallel-Distributed-Processing-Assignments>|
 
 ## <a name="2."></a>**2. Code & Explanation**
 

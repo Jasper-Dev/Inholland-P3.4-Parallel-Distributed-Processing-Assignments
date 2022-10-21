@@ -6,7 +6,7 @@
 |:-------|:-----------------------------------------------------------------------------------------|
 |Naam:   |Jasper Stedema                                                                            |
 |Nummer: |621642                                                                                    |
-|Github: |<https://github.com/Jasper-Dev/Inholland-P4.4-Parallel-Distributed-Processing-Assignments>|
+|Github: |<https://github.com/Jasper-Dev/Inholland-P3.4-Parallel-Distributed-Processing-Assignments>|
 
 ## <a name="2."></a>**2. Prerequisites**
 
